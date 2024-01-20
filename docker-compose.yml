@@ -7,8 +7,9 @@ services:
     container_name: database-c
     volumes:
       - ./database/backup:/data/db/backup
+      - ./database/volume:/data/db
     ports:
       - "27017:27017"
     env_file:
-      - ./database/env
+      - ./database/.env
     restart: always
