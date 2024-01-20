@@ -1,0 +1,14 @@
+version: "3"
+services:
+
+  database:
+    build: ./database
+    image: database-i
+    container_name: database-c
+    volumes:
+      - ./database/backup:/data/db/backup
+    ports:
+      - "27017:27017"
+    env_file:
+      - ./database/env
+    restart: always
