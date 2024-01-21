@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <title>Api Requests</title>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+      integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h1 class="mb-4" id="topHeader">Api Requests</h1>
+
+      <!-- results -->
+      <div class="card mb-4 border-primary shadow">
+        <div class="card-header">Results</div>
+        <div class="card-body">
+          <div id="results">
+            <div class="row">
+              <div class="col-12">
+                <div class="rounded p-0 overflow-hidden">
+                  <div
+                    id="httpResponse"
+                    class="border-start border-4 border-success"
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- results end -->
+
+      <!-- connection -->
+      <div class="card mb-4 border-warning">
+        <div class="card-header">Connection</div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12">
+              <button
+                class="btn btn-outline-primary"
+                type="button"
+                id="checkServer"
+              >
+                Check Server
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- connection end -->
+
+      <!-- Login -->
+      <div class="card mb-4 border-warning">
+        <div class="card-header">Login</div>
+        <div class="card-body">
+          <form action="" id="loginForm">
+            <div class="row">
+              <!-- username -->
+              <div class="col-4">
+                <label for="loginuserName" class="form-label">Username</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="loginuserName"
+                  value="ahmettoguz"
+                />
+              </div>
+
+              <!-- password -->
+              <div class="col-4">
+                <label for="loginpassword" class="form-label">Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="loginpassword"
+                  value="1234"
+                />
+              </div>
+            </div>
+
+            <div class="row mt-3">
+              <div>
+                <button class="btn btn-primary" type="submit">Login</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- Login end -->
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./script.js"></script>
+  </body>
+</html>
