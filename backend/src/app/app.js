@@ -15,6 +15,7 @@ const router = require("../router/router");
 
 // router configuration
 app.use("/health-check", router.healthCheck);
+app.use("/test", router.test);
 app.use("/auth", router.auth);
 app.use("/user", router.user);
 

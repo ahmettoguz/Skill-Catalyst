@@ -33,7 +33,7 @@ const domain = "localhost";
 const port = 3000;
 const url = `http://${domain}:${port}`;
 
-// user
+// connection
 const btnCheckServer = document.getElementById("checkServer");
 btnCheckServer.addEventListener("click", checkServer);
 function checkServer(e) {
@@ -59,6 +59,33 @@ function checkServer(e) {
   scrollToHeader();
 }
 
+const btntest = document.getElementById("test");
+btntest.addEventListener("click", test);
+function test(e) {
+  e.preventDefault();
+  console.log("check server");
+
+  // const ajaxData = {};
+
+  beforeSubmit();
+  $.ajax({
+    url: `${url}/test`,
+    type: "POST",
+    contentType: "application/json",
+    // data: JSON.stringify(ajaxData),
+
+    success: function (response) {
+      onSuccess(response);
+    },
+    error: function (response) {
+      onError(response);
+    },
+  });
+  scrollToHeader();
+}
+// connection end
+
+// user
 const btngetUserParam = document.getElementById("getUserParam");
 btngetUserParam.addEventListener("click", getUserParam);
 function getUserParam(e) {
