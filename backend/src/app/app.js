@@ -1,6 +1,10 @@
 const express = require("express");
 const app = express();
 
+// database import and configurations
+const Mongo = require("../database/mongo/Mongo");
+Mongo.connectDatabase();
+
 // middleware imports
 const bodyParser = require("body-parser");
 const cors = require("cors");
