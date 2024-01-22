@@ -33,6 +33,7 @@ const domain = "localhost";
 const port = 3000;
 const url = `http://${domain}:${port}`;
 
+// user
 const btnCheckServer = document.getElementById("checkServer");
 btnCheckServer.addEventListener("click", checkServer);
 function checkServer(e) {
@@ -132,6 +133,7 @@ function getUsers(e) {
   });
   scrollToHeader();
 }
+// user end
 
 const loginForm = document.getElementById("loginForm");
 loginForm.addEventListener("submit", loginFormSubmit);
