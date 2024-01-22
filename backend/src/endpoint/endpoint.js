@@ -8,7 +8,7 @@ const endpoint = {
   test: {
     test: Test.test,
   },
-  
+
   healthCheck: {
     backend: HealthCheck.backend,
     websocket: HealthCheck.websocket,
@@ -20,9 +20,14 @@ const endpoint = {
   },
 
   user: {
+    // -------------------- get
     getUsers: User.getUsers,
     getUserAsParameter: User.getUserAsParameter,
     getUserFromQueryString: User.getUserFromQueryString,
+
+    // -------------------- post
+    // Create
+    addUser: User.addUser,
   },
 };
 

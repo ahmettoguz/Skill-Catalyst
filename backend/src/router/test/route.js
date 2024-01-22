@@ -5,6 +5,6 @@ const router = Router();
 const endpoint = require("../../endpoint/endpoint");
 
 // route to endpoints
-router.route("/").post(endpoint.user.getUsers);
+router.route("/").post(endpoint.test.test);
 
 module.exports = router;

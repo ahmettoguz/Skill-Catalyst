@@ -160,6 +160,34 @@ function getUsers(e) {
   });
   scrollToHeader();
 }
+
+const btnaddUser = document.getElementById("addUser");
+btnaddUser.addEventListener("click", addUser);
+function addUser(e) {
+  console.log("addUser");
+
+  const ajaxData = {
+    email: "ahmet@hotmail.com",
+    password: "123",
+  };
+
+  beforeSubmit();
+
+  $.ajax({
+    url: `${url}/user/add-user`,
+    type: "post",
+    contentType: "application/json",
+    // data: JSON.stringify(ajaxData),
+
+    success: function (response) {
+      onSuccess(response);
+    },
+    error: function (response) {
+      onError(response);
+    },
+  });
+  scrollToHeader();
+}
 // user end
 
 const loginForm = document.getElementById("loginForm");

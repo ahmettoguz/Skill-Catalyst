@@ -28,6 +28,24 @@ class User {
       userId
     );
   }
+
+  // --------------------------------------------- Create
+  static async addUser(req, res) {
+    const newUser = {
+      email: req.body.email,
+      password: req.body.password,
+    };
+    const addedId = 1;
+
+    return ExpressService.returnResponse(
+      res,
+      200,
+      "user is added successfully",
+      {
+        id: addedId,
+      }
+    );
+  }
 }
 
 module.exports = User;
