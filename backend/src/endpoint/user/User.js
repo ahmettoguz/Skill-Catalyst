@@ -5,9 +5,9 @@ class User {
     return ExpressService.returnResponse(res, 200, "users");
   }
 
-  static async getUserFromQueryString(req, res) {
-    // get data form query string
-    const userId = req.query.id;
+  static async getUserAsParameter(req, res) {
+    // get data form param from location
+    const userId = req.params.id;
 
     return ExpressService.returnResponse(
       res,
@@ -17,9 +17,9 @@ class User {
     );
   }
 
-  static async getUserFromParam(req, res) {
-    // get data form param from location
-    const userId = req.params.userId;
+  static async getUserFromQueryString(req, res) {
+    // get data form query string
+    const userId = req.query.id;
 
     return ExpressService.returnResponse(
       res,
