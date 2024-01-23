@@ -1,7 +1,8 @@
-import model from "../../model";
+const model = require("../../../model/model");
 
 class Create {
-  async insertTest(userId, virtualUser, testName) {
+  async insert(id, user) {
+    
     try {
       const newTest = await model.Test.create({
         name: testName,
@@ -20,6 +21,4 @@ class Create {
   }
 }
 
-const create = new Create();
-
-export default create;
+module.exports = Create;

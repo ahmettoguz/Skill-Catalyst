@@ -1,7 +1,7 @@
-import model from "../../model";
+const model = require("../../../model/model");
 
 class Update {
-  async updateUser(userId, req) {
+  static async updateUser(userId, req) {
     // TODO add check to new attributes
     try {
       const newAttributes = {
@@ -26,6 +26,4 @@ class Update {
   }
 }
 
-const update = new Update();
-
-export default update;
+module.exports = Update;
