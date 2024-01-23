@@ -240,6 +240,28 @@ function getUserTypes(e) {
   scrollToHeader();
 }
 
+const btngetlimitedUserTypes = document.getElementById("getlimitedUserTypes");
+btngetlimitedUserTypes.addEventListener("click", getlimitedUserTypes);
+function getlimitedUserTypes(e) {
+  console.log("getlimitedUserTypes");
+  beforeSubmit();
+
+  $.ajax({
+    url: `${url}/user-type/limited?sort=desc&limit=2`,
+    type: "get",
+    contentType: "application/json",
+    // data: JSON.stringify(ajaxData),
+
+    success: function (response) {
+      onSuccess(response);
+    },
+    error: function (response) {
+      onError(response);
+    },
+  });
+  scrollToHeader();
+}
+
 const btngetUserType = document.getElementById("getUserType");
 btngetUserType.addEventListener("click", getUserType);
 function getUserType(e) {

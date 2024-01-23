@@ -40,6 +40,27 @@ class UserType {
     });
   }
 
+  static async getUserTypesLimited(req, res) {
+    // get variables from query string
+    const sort = req.query.sort;
+    const limit = req.query.limit;
+
+    // get user types from database
+    const userTypes = await crud.userTypes.Read.getUserTypesLimited(
+      sort,
+      limit
+    );
+
+    // check
+    if (!userTypes.state) {
+      return ExpressService.returnResponse(res, 500, "Internal server error!");
+    }
+
+    return ExpressService.returnResponse(res, 200, "get limited user types success", {
+      userTypes: userTypes.data,
+    });
+  }
+
   static async getUserType(req, res) {
     // get id from router parameter
     const id = req.params.id;
