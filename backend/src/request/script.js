@@ -284,6 +284,33 @@ function getUserType(e) {
   scrollToHeader();
 }
 
+const btnupdateUserType = document.getElementById("updateUserType");
+btnupdateUserType.addEventListener("click", updateUserType);
+function updateUserType(e) {
+  console.log("updateUserType");
+  beforeSubmit();
+
+  ajaxData = {
+    id: "65afc535a38f9d3388ab3662",
+    type: "NEW TYPE",
+  };
+
+  $.ajax({
+    url: `${url}/user-type/update`,
+    type: "post",
+    contentType: "application/json",
+    data: JSON.stringify(ajaxData),
+
+    success: function (response) {
+      onSuccess(response);
+    },
+    error: function (response) {
+      onError(response);
+    },
+  });
+  scrollToHeader();
+}
+
 // user type end
 
 // login

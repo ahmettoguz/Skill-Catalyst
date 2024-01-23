@@ -32,14 +32,16 @@ const endpoint = {
   },
 
   userType: {
-    // -------------------- get
+    // Create
+    createUserType: UserType.createUserType,
+
+    // Read
     getUserTypes: UserType.getUserTypes,
     getUserTypesLimited: UserType.getUserTypesLimited,
     getUserType: UserType.getUserType,
 
-    // -------------------- post
-    // Create
-    createUserType: UserType.createUserType,
+    // Update
+    updateUserType: UserType.updateUserType,
   },
 };
 

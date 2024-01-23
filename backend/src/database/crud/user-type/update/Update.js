@@ -1,27 +1,22 @@
+const LogService = require("../../../../service/LogService");
 const model = require("../../../model/model");
 
 class Update {
-  static async updateUser(userId, req) {
-    // TODO add check to new attributes
+  static async updateOne(id, req) {
     try {
-      const newAttributes = {
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        phone: req.body.phone,
-        profileBanner: req.body.profileBanner,
-        profilePicture: req.body.profilePicture,
-      };
-      const filter = { _id: userId };
-
-      // TODO add check for newAttributes undefined null
+      // set filter and new attributes
+      const filter = { _id: id };
+      const newAttributes = { type: req.body.type };
 
       // update user
-      await model.User.findOneAndUpdate(filter, newAttributes);
+      await model.UserType.findOneAndUpdate(filter, newAttributes);
 
-      return true;
+      // return state
+      return { state: true };
     } catch (error) {
-      console.error("updateUser error: ", error);
-      return null;
+      const err = `crud / user-type / update / updateOne : ${error}`;
+      LogService.error(err);
+      return { state: false, error: err };
     }
   }
 }

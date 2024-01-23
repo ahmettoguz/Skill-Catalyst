@@ -56,9 +56,14 @@ class UserType {
       return ExpressService.returnResponse(res, 500, "Internal server error!");
     }
 
-    return ExpressService.returnResponse(res, 200, "get limited user types success", {
-      userTypes: userTypes.data,
-    });
+    return ExpressService.returnResponse(
+      res,
+      200,
+      "get limited user types success",
+      {
+        userTypes: userTypes.data,
+      }
+    );
   }
 
   static async getUserType(req, res) {
@@ -76,6 +81,22 @@ class UserType {
     return ExpressService.returnResponse(res, 200, "get user type success", {
       userType: userType.data,
     });
+  }
+
+  // --------------------------------------------- Update
+  static async updateUserType(req, res) {
+    // get id from post body
+    const id = req.body.id;
+
+    // get user types from database
+    const updateOperation = await crud.userTypes.Update.updateOne(id, req);
+
+    // check
+    if (!updateOperation.state) {
+      return ExpressService.returnResponse(res, 500, "Internal server error!");
+    }
+
+    return ExpressService.returnResponse(res, 200, "user update success");
   }
 }
 
