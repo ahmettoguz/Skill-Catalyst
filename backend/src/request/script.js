@@ -69,8 +69,8 @@ function test(e) {
 
   beforeSubmit();
   $.ajax({
-    url: `${url}/test`,
-    type: "POST",
+    url: `https://ipapi.co/json/`,
+    type: "get",
     contentType: "application/json",
     // data: JSON.stringify(ajaxData),
 
