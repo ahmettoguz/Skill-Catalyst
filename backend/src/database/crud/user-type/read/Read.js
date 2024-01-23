@@ -1,45 +1,30 @@
 const model = require("../../../model/model");
 
-// const jwt = require("jsonwebtoken");
-
 class Read {
-  // async getUser(userId) {
-  //   try {
-  //     // get user info with tier, I use lean because want to remove password. Lean does converting mongoose doc to js object
-  //     const user: any = await model.User.findOne({ _id: userId })
-  //       .populate("tier", "name price")
-  //       .select("product quantity")
-  //       .lean();
-  //     // remove password
-  //     delete user.password;
+  async getUserTypes() {
+    try {
+      const readObjects = await model.UserType.find({}).lean;
 
-  //     // get user tests
-  //     const tests = await this.getUserTests(userId);
-  //     user.tests = tests;
+      // return found objects
+      return readObjects;
+    } catch (error) {
+      console.error("crud / user-type / read / getUserType :", error);
+      return null;
+    }
+  }
 
-  //     return user;
-  //   } catch (error) {
-  //     console.error("getUser: ", error);
-  //     return null;
-  //   }
-  // }
+  async getUserType(id) {
+    try {
+      // lean does converting mongoose doc to js object
+      const readObject = await model.UserType.findOne({ _id: id }).lean();
 
-  // async getUserTests(userId) {
-  //   try {
-  //     const tests = await model.Test.find({ user: userId });
-
-  //     // remove ids from result
-  //     const modifiedTests = tests.map((test) => {
-  //       const { _id, user, ...rest } = test.toObject();
-  //       return { ...rest, id: _id.toString() };
-  //     });
-
-  //     return modifiedTests;
-  //   } catch (error) {
-  //     console.error("getUserTests: ", error);
-  //     return null;
-  //   }
-  // }
+      // return found object
+      return readObject;
+    } catch (error) {
+      console.error("crud / user-type / read / getUserType :", error);
+      return null;
+    }
+  }
 }
 
 module.exports = Read;

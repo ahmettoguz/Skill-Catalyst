@@ -1,9 +1,9 @@
 const User = require("./user/User");
 const UserType = require("./user-type/UserType");
 
-const models = {
+const model = {
   User,
   UserType,
 };
 
-export default models;
+module.exports = model;

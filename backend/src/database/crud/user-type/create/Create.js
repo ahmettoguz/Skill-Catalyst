@@ -1,22 +1,17 @@
 const model = require("../../../model/model");
 
 class Create {
-  async insert(user) {
+  async insert(userType) {
     try {
-      const insertObject = await model.Test.create({
-        user_type: id,
-
-        name: user.name,
-        email: user.email,
-        password: user.password,
-        gender: user.gender,
+      const insertObject = await model.UserType.create({
+        type: userType.type,
       });
 
       // return inserted id
       const insertedId = insertObject._id.toString();
       return insertedId;
     } catch (error) {
-      console.error("crud - user - crate - insert :", error);
+      console.error("crud / user-type / crate / insert :", error);
       return null;
     }
   }
