@@ -4,13 +4,20 @@ const crud = require("../../database/crud/crud");
 class User {
   // --------------------------------------------- Create
   static async createUser(req, res) {
+    // get type with name and convert it to id, to insert with it
+    const userType = req.body.type;
+    const userTypeId = (await crud.userTypes.Read.getUserTypeByType(userType)).data._id;
+
     // create new object
-    const newUserType = {
-      type: req.body.type,
+    const newUser = {
+      user_type: userTypeId,
+      name: req.body.name,
+      email: req.body.email,
+      password: req.body.password,
     };
 
     // insert new object
-    const insertOperation = await crud.userTypes.Create.insert(newUserType);
+    const insertOperation = await crud.user.Create.create(newUser);
 
     // check insertion operation
     if (!insertOperation.state) {
@@ -20,7 +27,7 @@ class User {
     return ExpressService.returnResponse(
       res,
       200,
-      "user type is crated successfully",
+      "user create success",
       { id: insertOperation.insertedId }
     );
   }
@@ -151,9 +158,14 @@ class User {
       return ExpressService.returnResponse(res, 500, "Internal server error!");
     }
 
-    return ExpressService.returnResponse(res, 200, "user type deletes success", {
-      deletedCount: deleteOperation.deletedCount,
-    });
+    return ExpressService.returnResponse(
+      res,
+      200,
+      "user type deletes success",
+      {
+        deletedCount: deleteOperation.deletedCount,
+      }
+    );
   }
 }
 

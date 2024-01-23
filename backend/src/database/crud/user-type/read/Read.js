@@ -10,9 +10,8 @@ class Read {
       // return found objects
       return { state: true, data: { userTypes: readObjects, count } };
     } catch (error) {
-      const err = `crud / user-type / read / getUserTypes : ${error}`;
-      LogService.error(err);
-      return { state: false, error: err };
+      LogService.error(error);
+      return { state: false, error: error };
     }
   }
 
@@ -29,13 +28,13 @@ class Read {
       // return found objects
       return { state: true, data: readObjects };
     } catch (error) {
-      const err = `crud / user-type / read / getUserTypesLimited : ${error}`;
-      LogService.error(err);
-      return { state: false, error: err };
+      LogService.error(error);
+      return { state: false, error: error };
     }
   }
 
   static async getUserType(id) {
+    console.log("buraya geldi");
     try {
       // lean does converting mongoose doc to js object
       const readObject = await model.UserType.findOne({ _id: id }).lean();
@@ -43,9 +42,21 @@ class Read {
       // return found object
       return { state: true, data: readObject };
     } catch (error) {
-      const err = `crud / user-type / read / getUserType : ${error}`;
-      LogService.error(err);
-      return { state: false, error: err };
+      LogService.error(error);
+      return { state: false, error: error };
+    }
+  }
+
+  static async getUserTypeByType(type) {
+    try {
+      // lean does converting mongoose doc to js object
+      const readObject = await model.UserType.findOne({ type: type }).lean();
+
+      // return found object
+      return { state: true, data: readObject };
+    } catch (error) {
+      LogService.error(error);
+      return { state: false, error: error };
     }
   }
 }

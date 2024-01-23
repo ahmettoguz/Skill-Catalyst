@@ -10,7 +10,7 @@ class UserType {
     };
 
     // insert new object
-    const insertOperation = await crud.userTypes.Create.insert(newUserType);
+    const insertOperation = await crud.userTypes.Create.create(newUserType);
 
     // check insertion operation
     if (!insertOperation.state) {

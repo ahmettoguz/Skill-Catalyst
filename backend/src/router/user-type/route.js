@@ -11,7 +11,6 @@ router.route("/limited").get(endpoint.userType.readUserTypesLimited); // ?sort=a
 router.route("/:id").get(endpoint.userType.readUserType);
 
 // post
-router.route("/").post(endpoint.userType.createUserType);
 router.route("/create").post(endpoint.userType.createUserType);
 
 router.route("/update").post(endpoint.userType.updateUserType);

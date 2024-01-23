@@ -21,14 +21,21 @@ const endpoint = {
   },
 
   user: {
-    // -------------------- get
-    getUsers: User.getUsers,
-    getUserAsParameter: User.getUserAsParameter,
-    getUserFromQueryString: User.getUserFromQueryString,
-
-    // -------------------- post
     // Create
-    addUser: User.addUser,
+    createUser: User.createUser,
+
+    // Read
+    readUserTypes: UserType.readUserTypes,
+    readUserTypesLimited: UserType.readUserTypesLimited,
+    readUserType: UserType.readUserType,
+
+    // Update
+    updateUserType: UserType.updateUserType,
+    updateUserTypes: UserType.updateUserTypes,
+
+    // Delete
+    deleteUserType: UserType.deleteUserType,
+    deleteUserTypes: UserType.deleteUserTypes,
   },
 
   userType: {

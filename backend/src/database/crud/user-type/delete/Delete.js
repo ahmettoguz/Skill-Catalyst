@@ -13,9 +13,8 @@ class Delete {
       // return state
       return { state: true, deletedObject };
     } catch (error) {
-      const err = `crud / user-type / delete / deleteOne : ${error}`;
-      LogService.error(err);
-      return { state: false, error: err };
+      LogService.error(error);
+      return { state: false, error: error };
     }
   }
 
@@ -34,9 +33,8 @@ class Delete {
         deletedCount: deletedObjects.deletedCount,
       };
     } catch (error) {
-      const err = `crud / user-type / delete / deleteMany : ${error}`;
-      LogService.error(err);
-      return { state: false, error: err };
+      LogService.error(error);
+      return { state: false, error: error };
     }
   }
 }

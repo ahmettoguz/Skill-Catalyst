@@ -86,20 +86,25 @@ function test(e) {
 // connection end
 
 // user
-const btngetUserParam = document.getElementById("getUserParam");
-btngetUserParam.addEventListener("click", getUserParam);
-function getUserParam(e) {
-  console.log("getUserParam");
+const btncrateUser = document.getElementById("crateUser");
+btncrateUser.addEventListener("click", crateUser);
+function crateUser(e) {
+  console.log("crateUser");
 
-  // const ajaxData = {};
+  const ajaxData = {
+    type: "mentor",
+    name: "ahmet",
+    email: "ahmet@hotmail.com",
+    password: 1234,
+  };
 
   beforeSubmit();
 
   $.ajax({
-    url: `${url}/user/userParam/24`,
-    type: "GET",
+    url: `${url}/user/create`,
+    type: "post",
     contentType: "application/json",
-    // data: JSON.stringify(ajaxData),
+    data: JSON.stringify(ajaxData),
 
     success: function (response) {
       onSuccess(response);

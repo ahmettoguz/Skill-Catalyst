@@ -6,11 +6,17 @@ const endpoint = require("../../endpoint/endpoint");
 
 // route to endpoints
 // get
-// router.route("/users").get(endpoint.user.getUsers);
-// router.route("/userParam/:id").get(endpoint.user.getUserAsParameter);
-// router.route("/userQuery").get(endpoint.user.getUserFromQueryString);
+router.route("/").get(endpoint.userType.readUserTypes);
+router.route("/limited").get(endpoint.userType.readUserTypesLimited); // ?sort=asc&limit=5
+router.route("/:id").get(endpoint.userType.readUserType);
 
-// // post
-// router.route("/add-user").post(endpoint.user.addUser);
+// post
+router.route("/create").post(endpoint.user.createUser);
+
+router.route("/update").post(endpoint.userType.updateUserType);
+router.route("/update-many").post(endpoint.userType.updateUserTypes);
+
+router.route("/delete").post(endpoint.userType.deleteUserType);
+router.route("/delete-many").post(endpoint.userType.deleteUserTypes);
 
 module.exports = router;
