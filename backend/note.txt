@@ -26,5 +26,5 @@ Uninstall Dependencies:
     npm rm express
 ------------------------------------------------------------
 
-add userdata to req after jwt valdiation.
+check route file for how to use location params
 ------------------------------------------------------------

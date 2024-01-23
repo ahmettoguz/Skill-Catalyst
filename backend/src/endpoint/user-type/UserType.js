@@ -26,7 +26,7 @@ class UserType {
   }
 
   // --------------------------------------------- Read
-  static async getUserTypes(req, res) {
+  static async readUserTypes(req, res) {
     // get user types from database
     const userTypes = await crud.userTypes.Read.getUserTypes();
 
@@ -40,7 +40,7 @@ class UserType {
     });
   }
 
-  static async getUserTypesLimited(req, res) {
+  static async readUserTypesLimited(req, res) {
     // get variables from query string
     const sort = req.query.sort;
     const limit = req.query.limit;
@@ -66,7 +66,7 @@ class UserType {
     );
   }
 
-  static async getUserType(req, res) {
+  static async readUserType(req, res) {
     // get id from router parameter
     const id = req.params.id;
 
@@ -99,7 +99,7 @@ class UserType {
     return ExpressService.returnResponse(res, 200, "user type update success");
   }
 
-  static async updateUserTypeMany(req, res) {
+  static async updateUserTypes(req, res) {
     // get type from post body
     const type = req.body.type;
 

@@ -36,13 +36,13 @@ const endpoint = {
     createUserType: UserType.createUserType,
 
     // Read
-    getUserTypes: UserType.getUserTypes,
-    getUserTypesLimited: UserType.getUserTypesLimited,
-    getUserType: UserType.getUserType,
+    readUserTypes: UserType.readUserTypes,
+    readUserTypesLimited: UserType.readUserTypesLimited,
+    readUserType: UserType.readUserType,
 
     // Update
     updateUserType: UserType.updateUserType,
-    updateUserTypeMany: UserType.updateUserTypeMany,
+    updateUserTypes: UserType.updateUserTypes,
 
     // Delete
     deleteUserType: UserType.deleteUserType,
