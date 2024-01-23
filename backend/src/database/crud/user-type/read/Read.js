@@ -1,28 +1,31 @@
+const LogService = require("../../../../service/LogService");
 const model = require("../../../model/model");
 
 class Read {
-  async getUserTypes() {
+  static async getUserTypes() {
     try {
       const readObjects = await model.UserType.find({}).lean;
 
       // return found objects
-      return readObjects;
+      return { state: true, data: readObjects };
     } catch (error) {
-      console.error("crud / user-type / read / getUserType :", error);
-      return null;
+      const err = `crud / user-type / read / getUserTypes : ${error}`;
+      LogService.error(err);
+      return { state: false, error: err };
     }
   }
 
-  async getUserType(id) {
+  static async getUserType(id) {
     try {
       // lean does converting mongoose doc to js object
       const readObject = await model.UserType.findOne({ _id: id }).lean();
 
       // return found object
-      return readObject;
+      return { state: true, data: readObject };
     } catch (error) {
-      console.error("crud / user-type / read / getUserType :", error);
-      return null;
+      const err = `crud / user-type / read / getUserType : ${error}`;
+      LogService.error(err);
+      return { state: false, error: err };
     }
   }
 }

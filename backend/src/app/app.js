@@ -22,5 +22,6 @@ app.use("/health-check", router.healthCheck);
 app.use("/test", router.test);
 app.use("/auth", router.auth);
 app.use("/user", router.user);
+app.use("/user-type", router.userType);
 
 module.exports = app;

@@ -1,7 +1,11 @@
 const ExpressService = require("../../service/ExpressService");
+const crud = require("../../database/crud/crud");
 
 class User {
   static async getUsers(req, res) {
+
+    // const users = crud.userTypes.Create.insert();
+
     return ExpressService.returnResponse(res, 200, "users");
   }
 

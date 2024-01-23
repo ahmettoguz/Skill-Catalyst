@@ -1,7 +1,9 @@
 const user = require("./user/crud");
+const userTypes = require("./user-type/crud");
 
 const crud = {
   user,
+  userTypes,
 };
 
-export default crud;
+module.exports = crud;

@@ -2,6 +2,7 @@ const HealthCheck = require("./health-check/HealthCheck");
 const Test = require("./test/Test");
 const Auth = require("./auth/Auth");
 const User = require("./user/User");
+const UserType = require("./user-type/UserType");
 
 // all endpoints
 const endpoint = {
@@ -28,6 +29,15 @@ const endpoint = {
     // -------------------- post
     // Create
     addUser: User.addUser,
+  },
+
+  userType: {
+    // -------------------- get
+    getUserTypes: UserType.getUserTypes,
+
+    // -------------------- post
+    // Create
+    createUserType: UserType.createUserType,
   },
 };
 

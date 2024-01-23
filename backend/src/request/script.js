@@ -190,6 +190,57 @@ function addUser(e) {
 }
 // user end
 
+// user type
+const btngetUserTypes = document.getElementById("getUserTypes");
+btngetUserTypes.addEventListener("click", getUserTypes);
+function getUserTypes(e) {
+  console.log("getUserTypes");
+  beforeSubmit();
+
+  $.ajax({
+    url: `${url}/user-type/`,
+    type: "get",
+    contentType: "application/json",
+    // data: JSON.stringify(ajaxData),
+
+    success: function (response) {
+      onSuccess(response);
+    },
+    error: function (response) {
+      onError(response);
+    },
+  });
+  scrollToHeader();
+}
+
+const btncrateUserType = document.getElementById("crateUserType");
+btncrateUserType.addEventListener("click", crateUserType);
+function crateUserType(e) {
+  console.log("crateUserType");
+  beforeSubmit();
+
+  ajaxData = {
+    type: "mentee",
+  };
+
+  $.ajax({
+    url: `${url}/user-type/create`,
+    type: "post",
+    contentType: "application/json",
+    data: JSON.stringify(ajaxData),
+
+    success: function (response) {
+      onSuccess(response);
+    },
+    error: function (response) {
+      onError(response);
+    },
+  });
+  scrollToHeader();
+}
+// user type end
+
+// login
 const loginForm = document.getElementById("loginForm");
 loginForm.addEventListener("submit", loginFormSubmit);
 function loginFormSubmit(e) {
@@ -223,3 +274,4 @@ function loginFormSubmit(e) {
   });
   scrollToHeader();
 }
+// login end
