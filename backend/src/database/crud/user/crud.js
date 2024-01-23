@@ -5,10 +5,10 @@ const Delete = require("./delete/Delete");
 
 // operations
 const crud = {
-  Create,
-  Read,
-  Update,
-  Delete,
+  Create: Create,
+  Read: Read,
+  Update: Update,
+  Delete: Delete,
 };
 
 module.exports = crud;

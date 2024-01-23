@@ -19,6 +19,24 @@ class Update {
       return { state: false, error: err };
     }
   }
+
+  static async updateMany(type, req) {
+    try {
+      // set filter and new attributes
+      const filter = { type: type };
+      const newAttributes = { type: req.body.newType };
+
+      // update user
+      const result = await model.UserType.updateMany(filter, newAttributes);
+
+      // return state
+      return { state: true, updatedCount: result.modifiedCount };
+    } catch (error) {
+      const err = `crud / user-type / update / updateOne : ${error}`;
+      LogService.error(err);
+      return { state: false, error: err };
+    }
+  }
 }
 
 module.exports = Update;

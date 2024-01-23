@@ -12,7 +12,9 @@ router.route("/limited").get(endpoint.userType.getUserTypesLimited);
 // post
 router.route("/").post(endpoint.userType.createUserType);
 router.route("/create").post(endpoint.userType.createUserType);
+
 router.route("/update").post(endpoint.userType.updateUserType);
+router.route("/update-many").post(endpoint.userType.updateUserTypeMany);
 
 // root
 router.route("/:id").get(endpoint.userType.getUserType);

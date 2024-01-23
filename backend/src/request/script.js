@@ -311,6 +311,33 @@ function updateUserType(e) {
   scrollToHeader();
 }
 
+const btnupdateUserTypeMany = document.getElementById("updateUserTypeMany");
+btnupdateUserTypeMany.addEventListener("click", updateUserTypeMany);
+function updateUserTypeMany(e) {
+  console.log("updateUserTypeMany");
+  beforeSubmit();
+
+  ajaxData = {
+    type: "mentee",
+    newType: "NEW TYPES",
+  };
+
+  $.ajax({
+    url: `${url}/user-type/update-many`,
+    type: "post",
+    contentType: "application/json",
+    data: JSON.stringify(ajaxData),
+
+    success: function (response) {
+      onSuccess(response);
+    },
+    error: function (response) {
+      onError(response);
+    },
+  });
+  scrollToHeader();
+}
+
 // user type end
 
 // login

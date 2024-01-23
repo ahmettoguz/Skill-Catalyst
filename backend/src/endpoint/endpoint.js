@@ -42,6 +42,7 @@ const endpoint = {
 
     // Update
     updateUserType: UserType.updateUserType,
+    updateUserTypeMany: UserType.updateUserTypeMany,
   },
 };
 

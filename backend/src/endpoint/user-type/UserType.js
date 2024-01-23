@@ -88,7 +88,7 @@ class UserType {
     // get id from post body
     const id = req.body.id;
 
-    // get user types from database
+    // update user type from database
     const updateOperation = await crud.userTypes.Update.updateOne(id, req);
 
     // check
@@ -97,6 +97,23 @@ class UserType {
     }
 
     return ExpressService.returnResponse(res, 200, "user update success");
+  }
+
+  static async updateUserTypeMany(req, res) {
+    // get type from post body
+    const type = req.body.type;
+
+    // update user types from database
+    const updateOperation = await crud.userTypes.Update.updateMany(type, req);
+
+    // check
+    if (!updateOperation.state) {
+      return ExpressService.returnResponse(res, 500, "Internal server error!");
+    }
+
+    return ExpressService.returnResponse(res, 200, "user updates success", {
+      updatedCount: updateOperation.updatedCount,
+    });
   }
 }
 
