@@ -1,3 +1,4 @@
+const LogService = require("../../service/LogService");
 const mongoose = require("mongoose");
 
 class Mongo {
@@ -10,10 +11,10 @@ class Mongo {
 
     try {
       await mongoose.connect(process.env.DB_URI);
-      console.info("✅ MongoDB connected successfully. ✅");
+      LogService.info("MongoDB connected successfully.");
     } catch (err) {
       //   console.error("Unable to connect to MongoDB: ", err);
-      console.error("❌ Unable to connect to MongoDB. ❌");
+      LogService.error("Unable to connect to MongoDB.");
     }
   }
 }

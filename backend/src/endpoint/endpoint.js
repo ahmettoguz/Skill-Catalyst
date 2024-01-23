@@ -34,6 +34,7 @@ const endpoint = {
   userType: {
     // -------------------- get
     getUserTypes: UserType.getUserTypes,
+    getUserType: UserType.getUserType,
 
     // -------------------- post
     // Create

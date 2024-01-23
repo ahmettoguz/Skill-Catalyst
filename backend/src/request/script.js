@@ -191,27 +191,6 @@ function addUser(e) {
 // user end
 
 // user type
-const btngetUserTypes = document.getElementById("getUserTypes");
-btngetUserTypes.addEventListener("click", getUserTypes);
-function getUserTypes(e) {
-  console.log("getUserTypes");
-  beforeSubmit();
-
-  $.ajax({
-    url: `${url}/user-type/`,
-    type: "get",
-    contentType: "application/json",
-    // data: JSON.stringify(ajaxData),
-
-    success: function (response) {
-      onSuccess(response);
-    },
-    error: function (response) {
-      onError(response);
-    },
-  });
-  scrollToHeader();
-}
 
 const btncrateUserType = document.getElementById("crateUserType");
 btncrateUserType.addEventListener("click", crateUserType);
@@ -238,6 +217,51 @@ function crateUserType(e) {
   });
   scrollToHeader();
 }
+
+const btngetUserTypes = document.getElementById("getUserTypes");
+btngetUserTypes.addEventListener("click", getUserTypes);
+function getUserTypes(e) {
+  console.log("getUserTypes");
+  beforeSubmit();
+
+  $.ajax({
+    url: `${url}/user-type/`,
+    type: "get",
+    contentType: "application/json",
+    // data: JSON.stringify(ajaxData),
+
+    success: function (response) {
+      onSuccess(response);
+    },
+    error: function (response) {
+      onError(response);
+    },
+  });
+  scrollToHeader();
+}
+
+const btngetUserType = document.getElementById("getUserType");
+btngetUserType.addEventListener("click", getUserType);
+function getUserType(e) {
+  console.log("getUserType");
+  beforeSubmit();
+
+  $.ajax({
+    url: `${url}/user-type/65afc535a38f9d3388ab3662`,
+    type: "get",
+    contentType: "application/json",
+    // data: JSON.stringify(ajaxData),
+
+    success: function (response) {
+      onSuccess(response);
+    },
+    error: function (response) {
+      onError(response);
+    },
+  });
+  scrollToHeader();
+}
+
 // user type end
 
 // login
