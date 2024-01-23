@@ -1,7 +1,11 @@
 const ExpressService = require("../../service/ExpressService");
+const crud = require("../../database/crud/crud");
 
 class User {
   static async getUsers(req, res) {
+
+    // const users = crud.userTypes.Create.insert();
+
     return ExpressService.returnResponse(res, 200, "users");
   }
 
@@ -26,6 +30,24 @@ class User {
       200,
       "get specific user with id:",
       userId
+    );
+  }
+
+  // --------------------------------------------- Create
+  static async addUser(req, res) {
+    const newUser = {
+      email: req.body.email,
+      password: req.body.password,
+    };
+    const addedId = 1;
+
+    return ExpressService.returnResponse(
+      res,
+      200,
+      "user is added successfully",
+      {
+        id: addedId,
+      }
     );
   }
 }

@@ -17,11 +17,20 @@ Technologies:
 Database:
 
 Export current database:
-    docker exec -it database-c /bin/bash -c "cd /data/db/backup && bash export.sh"
+    docker exec -it database-c /bin/bash -c "cd /data/db/backup && mongodump --uri='mongodb://admin:admin123@localhost:27017/?authMechanism=SCRAM-SHA-256&authSource=admin' --db=Skill-Catalyst --out=/data/db/backup"
 
 Import backed up database:
-    docker exec -it database-c /bin/bash -c "cd /data/db/backup && bash import.sh"
+    docker exec -it database-c /bin/bash -c "cd /data/db/backup && mongorestore --uri='mongodb://admin:admin123@localhost:27017/?authMechanism=SCRAM-SHA-256&authSource=admin' --db=Skill-Catalyst /data/db/backup/Skill-Catalyst"
+
+Drop database:
+    docker exec -it database-c mongosh --authenticationDatabase admin --username admin --password admin123 --eval "db.getSiblingDB('Skill-Catalyst').dropDatabase();"
+    
+Check database:
+    docker exec -it database-c mongosh --authenticationDatabase admin --username admin --password admin123 --eval "show dbs;"
+
 ---------------------------------
+docker exec -it database-c /bin/bash
+cd /data/db/backup
 
 docker-compose up -d --build
 
@@ -31,4 +40,8 @@ docker logs database-c
 docker inspect --format '{{.RestartCount}}' database-c
 
 docker compose down
+---------------------------------
+Flow:
+
+app.js -> router.js -> endpoint.js -> crud.js -> specific crud.js
 ---------------------------------

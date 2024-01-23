@@ -19,7 +19,7 @@
       referrerpolicy="no-referrer"
     ></script>
   </head>
-  <body>
+  <body data-bs-theme="dark">
     <div class="container mt-5">
       <h1 class="mb-4" id="topHeader">Api Requests</h1>
 
@@ -49,6 +49,7 @@
         <div class="card-body">
           <div class="row">
             <div class="col-12">
+              <!-- check server -->
               <button
                 class="btn btn-outline-primary"
                 type="button"
@@ -56,6 +57,13 @@
               >
                 Check Server
               </button>
+              <!-- check server -->
+
+              <!-- test -->
+              <button class="btn btn-outline-primary" type="button" id="test">
+                Test
+              </button>
+              <!-- test -->
             </div>
           </div>
         </div>
@@ -94,11 +102,113 @@
               >
                 Get User Query
               </button>
+
+              <!-- add user -->
+              <button
+                class="btn btn-outline-primary"
+                type="button"
+                id="addUser"
+              >
+                Add User
+              </button>
             </div>
           </div>
         </div>
       </div>
       <!-- user end -->
+
+      <!-- user type -->
+      <div class="card mb-4 border-warning">
+        <div class="card-header">User Type</div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12">
+              <h6>Create</h6>
+              <!-- create user type -->
+              <button
+                class="btn btn-outline-primary"
+                type="button"
+                id="crateUserType"
+              >
+                Create User Type
+              </button>
+
+              <div class="blank pt-3"></div>
+              <h6>Read</h6>
+
+              <!-- get user types -->
+              <button
+                class="btn btn-outline-primary"
+                type="button"
+                id="getUserTypes"
+              >
+                Get User Types
+              </button>
+
+              <!-- get limited user types -->
+              <button
+                class="btn btn-outline-primary"
+                type="button"
+                id="getlimitedUserTypes"
+              >
+                Get Limited User Types
+              </button>
+
+              <!-- get user type -->
+              <button
+                class="btn btn-outline-primary"
+                type="button"
+                id="getUserType"
+              >
+                Get User Type
+              </button>
+
+              <div class="blank pt-3"></div>
+              <h6>Update</h6>
+
+              <!-- update user type -->
+              <button
+                class="btn btn-outline-primary"
+                type="button"
+                id="updateUserType"
+              >
+                Update User Type
+              </button>
+
+              <!-- update user type many -->
+              <button
+                class="btn btn-outline-primary"
+                type="button"
+                id="updateUserTypeMany"
+              >
+                Update User Type Many
+              </button>
+
+              <div class="blank pt-3"></div>
+              <h6>Delete</h6>
+
+              <!-- delete user type -->
+              <button
+                class="btn btn-outline-primary"
+                type="button"
+                id="deleteUserType"
+              >
+                Delete User Type
+              </button>
+
+              <!-- delete user type many -->
+              <button
+                class="btn btn-outline-primary"
+                type="button"
+                id="deleteUserTypeMany"
+              >
+                Delete User Type Many
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- user type end -->
 
       <!-- Login -->
       <div class="card mb-4 border-warning">

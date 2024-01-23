@@ -33,7 +33,7 @@ const domain = "localhost";
 const port = 3000;
 const url = `http://${domain}:${port}`;
 
-// user
+// connection
 const btnCheckServer = document.getElementById("checkServer");
 btnCheckServer.addEventListener("click", checkServer);
 function checkServer(e) {
@@ -59,6 +59,33 @@ function checkServer(e) {
   scrollToHeader();
 }
 
+const btntest = document.getElementById("test");
+btntest.addEventListener("click", test);
+function test(e) {
+  e.preventDefault();
+  console.log("check server");
+
+  // const ajaxData = {};
+
+  beforeSubmit();
+  $.ajax({
+    url: `https://ipapi.co/json/`,
+    type: "get",
+    contentType: "application/json",
+    // data: JSON.stringify(ajaxData),
+
+    success: function (response) {
+      onSuccess(response);
+    },
+    error: function (response) {
+      onError(response);
+    },
+  });
+  scrollToHeader();
+}
+// connection end
+
+// user
 const btngetUserParam = document.getElementById("getUserParam");
 btngetUserParam.addEventListener("click", getUserParam);
 function getUserParam(e) {
@@ -133,8 +160,239 @@ function getUsers(e) {
   });
   scrollToHeader();
 }
+
+const btnaddUser = document.getElementById("addUser");
+btnaddUser.addEventListener("click", addUser);
+function addUser(e) {
+  console.log("addUser");
+
+  const ajaxData = {
+    email: "ahmet@hotmail.com",
+    password: "123",
+  };
+
+  beforeSubmit();
+
+  $.ajax({
+    url: `${url}/user/add-user`,
+    type: "post",
+    contentType: "application/json",
+    // data: JSON.stringify(ajaxData),
+
+    success: function (response) {
+      onSuccess(response);
+    },
+    error: function (response) {
+      onError(response);
+    },
+  });
+  scrollToHeader();
+}
 // user end
 
+// user type
+
+const btncrateUserType = document.getElementById("crateUserType");
+btncrateUserType.addEventListener("click", crateUserType);
+function crateUserType(e) {
+  console.log("crateUserType");
+  beforeSubmit();
+
+  ajaxData = {
+    type: "mentee",
+  };
+
+  $.ajax({
+    url: `${url}/user-type/create`,
+    type: "post",
+    contentType: "application/json",
+    data: JSON.stringify(ajaxData),
+
+    success: function (response) {
+      onSuccess(response);
+    },
+    error: function (response) {
+      onError(response);
+    },
+  });
+  scrollToHeader();
+}
+
+const btngetUserTypes = document.getElementById("getUserTypes");
+btngetUserTypes.addEventListener("click", getUserTypes);
+function getUserTypes(e) {
+  console.log("getUserTypes");
+  beforeSubmit();
+
+  $.ajax({
+    url: `${url}/user-type/`,
+    type: "get",
+    contentType: "application/json",
+    // data: JSON.stringify(ajaxData),
+
+    success: function (response) {
+      onSuccess(response);
+    },
+    error: function (response) {
+      onError(response);
+    },
+  });
+  scrollToHeader();
+}
+
+const btngetlimitedUserTypes = document.getElementById("getlimitedUserTypes");
+btngetlimitedUserTypes.addEventListener("click", getlimitedUserTypes);
+function getlimitedUserTypes(e) {
+  console.log("getlimitedUserTypes");
+  beforeSubmit();
+
+  $.ajax({
+    url: `${url}/user-type/limited?sort=desc&limit=2`,
+    type: "get",
+    contentType: "application/json",
+    // data: JSON.stringify(ajaxData),
+
+    success: function (response) {
+      onSuccess(response);
+    },
+    error: function (response) {
+      onError(response);
+    },
+  });
+  scrollToHeader();
+}
+
+const btngetUserType = document.getElementById("getUserType");
+btngetUserType.addEventListener("click", getUserType);
+function getUserType(e) {
+  console.log("getUserType");
+  beforeSubmit();
+
+  $.ajax({
+    url: `${url}/user-type/65afc535a38f9d3388ab3662`,
+    type: "get",
+    contentType: "application/json",
+    // data: JSON.stringify(ajaxData),
+
+    success: function (response) {
+      onSuccess(response);
+    },
+    error: function (response) {
+      onError(response);
+    },
+  });
+  scrollToHeader();
+}
+
+const btnupdateUserType = document.getElementById("updateUserType");
+btnupdateUserType.addEventListener("click", updateUserType);
+function updateUserType(e) {
+  console.log("updateUserType");
+  beforeSubmit();
+
+  ajaxData = {
+    id: "65afc535a38f9d3388ab3662",
+    type: "NEW TYPE",
+  };
+
+  $.ajax({
+    url: `${url}/user-type/update`,
+    type: "post",
+    contentType: "application/json",
+    data: JSON.stringify(ajaxData),
+
+    success: function (response) {
+      onSuccess(response);
+    },
+    error: function (response) {
+      onError(response);
+    },
+  });
+  scrollToHeader();
+}
+
+const btnupdateUserTypeMany = document.getElementById("updateUserTypeMany");
+btnupdateUserTypeMany.addEventListener("click", updateUserTypeMany);
+function updateUserTypeMany(e) {
+  console.log("updateUserTypeMany");
+  beforeSubmit();
+
+  ajaxData = {
+    type: "mentee",
+    newType: "NEW TYPES",
+  };
+
+  $.ajax({
+    url: `${url}/user-type/update-many`,
+    type: "post",
+    contentType: "application/json",
+    data: JSON.stringify(ajaxData),
+
+    success: function (response) {
+      onSuccess(response);
+    },
+    error: function (response) {
+      onError(response);
+    },
+  });
+  scrollToHeader();
+}
+
+const btndeleteUserType = document.getElementById("deleteUserType");
+btndeleteUserType.addEventListener("click", deleteUserType);
+function deleteUserType(e) {
+  console.log("deleteUserType");
+  beforeSubmit();
+
+  ajaxData = {
+    id: "65afc535a38f9d3388ab3662",
+  };
+
+  $.ajax({
+    url: `${url}/user-type/delete`,
+    type: "post",
+    contentType: "application/json",
+    data: JSON.stringify(ajaxData),
+
+    success: function (response) {
+      onSuccess(response);
+    },
+    error: function (response) {
+      onError(response);
+    },
+  });
+  scrollToHeader();
+}
+
+const btndeleteUserTypeMany = document.getElementById("deleteUserTypeMany");
+btndeleteUserTypeMany.addEventListener("click", deleteUserTypeMany);
+function deleteUserTypeMany(e) {
+  console.log("deleteUserTypeMany");
+  beforeSubmit();
+
+  ajaxData = {
+    type: "mentee",
+  };
+
+  $.ajax({
+    url: `${url}/user-type/delete-many`,
+    type: "post",
+    contentType: "application/json",
+    data: JSON.stringify(ajaxData),
+
+    success: function (response) {
+      onSuccess(response);
+    },
+    error: function (response) {
+      onError(response);
+    },
+  });
+  scrollToHeader();
+}
+
+// user type end
+
+// login
 const loginForm = document.getElementById("loginForm");
 loginForm.addEventListener("submit", loginFormSubmit);
 function loginFormSubmit(e) {
@@ -168,3 +426,4 @@ function loginFormSubmit(e) {
   });
   scrollToHeader();
 }
+// login end

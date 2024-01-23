@@ -1,6 +1,10 @@
 const express = require("express");
 const app = express();
 
+// database import and configurations
+const Mongo = require("../database/mongo/Mongo");
+Mongo.connectDatabase();
+
 // middleware imports
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -15,7 +19,9 @@ const router = require("../router/router");
 
 // router configuration
 app.use("/health-check", router.healthCheck);
+app.use("/test", router.test);
 app.use("/auth", router.auth);
 app.use("/user", router.user);
+app.use("/user-type", router.userType);
 
 module.exports = app;
