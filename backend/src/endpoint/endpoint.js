@@ -43,6 +43,9 @@ const endpoint = {
     // Update
     updateUserType: UserType.updateUserType,
     updateUserTypeMany: UserType.updateUserTypeMany,
+
+    // Delete
+    deleteUserType: UserType.deleteUserType,
   },
 };
 

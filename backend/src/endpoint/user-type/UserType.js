@@ -36,7 +36,7 @@ class UserType {
     }
 
     return ExpressService.returnResponse(res, 200, "get user types success", {
-      userTypes: userTypes.data,
+      userTypes: userTypes.data.userTypes,
     });
   }
 
@@ -113,6 +113,24 @@ class UserType {
 
     return ExpressService.returnResponse(res, 200, "user updates success", {
       updatedCount: updateOperation.updatedCount,
+    });
+  }
+
+  // --------------------------------------------- Delete
+  static async deleteUserType(req, res) {
+    // get id from post body
+    const id = req.body.id;
+
+    // delete user type from database
+    const deleteOperation = await crud.userTypes.Delete.deleteOne(id);
+
+    // check
+    if (!deleteOperation.state) {
+      return ExpressService.returnResponse(res, 500, "Internal server error!");
+    }
+
+    return ExpressService.returnResponse(res, 200, "user delete success", {
+      deletedObject: deleteOperation.deletedObject,
     });
   }
 }

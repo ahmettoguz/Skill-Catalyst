@@ -338,6 +338,32 @@ function updateUserTypeMany(e) {
   scrollToHeader();
 }
 
+const btndeleteUserType = document.getElementById("deleteUserType");
+btndeleteUserType.addEventListener("click", deleteUserType);
+function deleteUserType(e) {
+  console.log("deleteUserType");
+  beforeSubmit();
+
+  ajaxData = {
+    id: "65afc535a38f9d3388ab3662",
+  };
+
+  $.ajax({
+    url: `${url}/user-type/delete`,
+    type: "post",
+    contentType: "application/json",
+    data: JSON.stringify(ajaxData),
+
+    success: function (response) {
+      onSuccess(response);
+    },
+    error: function (response) {
+      onError(response);
+    },
+  });
+  scrollToHeader();
+}
+
 // user type end
 
 // login
