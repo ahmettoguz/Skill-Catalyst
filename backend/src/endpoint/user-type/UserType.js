@@ -96,7 +96,7 @@ class UserType {
       return ExpressService.returnResponse(res, 500, "Internal server error!");
     }
 
-    return ExpressService.returnResponse(res, 200, "user update success");
+    return ExpressService.returnResponse(res, 200, "user type update success");
   }
 
   static async updateUserTypeMany(req, res) {
@@ -111,9 +111,14 @@ class UserType {
       return ExpressService.returnResponse(res, 500, "Internal server error!");
     }
 
-    return ExpressService.returnResponse(res, 200, "user updates success", {
-      updatedCount: updateOperation.updatedCount,
-    });
+    return ExpressService.returnResponse(
+      res,
+      200,
+      "user type updates success",
+      {
+        updatedCount: updateOperation.updatedCount,
+      }
+    );
   }
 
   // --------------------------------------------- Delete
@@ -129,8 +134,25 @@ class UserType {
       return ExpressService.returnResponse(res, 500, "Internal server error!");
     }
 
-    return ExpressService.returnResponse(res, 200, "user delete success", {
+    return ExpressService.returnResponse(res, 200, "user type delete success", {
       deletedObject: deleteOperation.deletedObject,
+    });
+  }
+
+  static async deleteUserTypes(req, res) {
+    // get type from post body
+    const type = req.body.type;
+
+    // delete user type from database
+    const deleteOperation = await crud.userTypes.Delete.deleteMany(type);
+
+    // check
+    if (!deleteOperation.state) {
+      return ExpressService.returnResponse(res, 500, "Internal server error!");
+    }
+
+    return ExpressService.returnResponse(res, 200, "user type deletes success", {
+      deletedCount: deleteOperation.deletedCount,
     });
   }
 }

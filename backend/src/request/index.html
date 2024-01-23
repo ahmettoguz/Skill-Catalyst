@@ -19,7 +19,7 @@
       referrerpolicy="no-referrer"
     ></script>
   </head>
-  <body data-bs-theme="dark" >
+  <body data-bs-theme="dark">
     <div class="container mt-5">
       <h1 class="mb-4" id="topHeader">Api Requests</h1>
 
@@ -123,6 +123,7 @@
         <div class="card-body">
           <div class="row">
             <div class="col-12">
+              <h6>Create</h6>
               <!-- create user type -->
               <button
                 class="btn btn-outline-primary"
@@ -131,6 +132,9 @@
               >
                 Create User Type
               </button>
+
+              <div class="blank pt-3"></div>
+              <h6>Read</h6>
 
               <!-- get user types -->
               <button
@@ -159,13 +163,16 @@
                 Get User Type
               </button>
 
+              <div class="blank pt-3"></div>
+              <h6>Update</h6>
+
               <!-- update user type -->
               <button
                 class="btn btn-outline-primary"
                 type="button"
                 id="updateUserType"
               >
-              Update User Type
+                Update User Type
               </button>
 
               <!-- update user type many -->
@@ -174,8 +181,11 @@
                 type="button"
                 id="updateUserTypeMany"
               >
-              Update User Type Many
+                Update User Type Many
               </button>
+
+              <div class="blank pt-3"></div>
+              <h6>Delete</h6>
 
               <!-- delete user type -->
               <button
@@ -183,7 +193,16 @@
                 type="button"
                 id="deleteUserType"
               >
-              Delete User Type
+                Delete User Type
+              </button>
+
+              <!-- delete user type many -->
+              <button
+                class="btn btn-outline-primary"
+                type="button"
+                id="deleteUserTypeMany"
+              >
+                Delete User Type Many
               </button>
             </div>
           </div>

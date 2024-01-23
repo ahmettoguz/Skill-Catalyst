@@ -18,5 +18,6 @@ router.route("/update").post(endpoint.userType.updateUserType);
 router.route("/update-many").post(endpoint.userType.updateUserTypeMany);
 
 router.route("/delete").post(endpoint.userType.deleteUserType);
+router.route("/delete-many").post(endpoint.userType.deleteUserTypes);
 
 module.exports = router;

@@ -46,6 +46,7 @@ const endpoint = {
 
     // Delete
     deleteUserType: UserType.deleteUserType,
+    deleteUserTypes: UserType.deleteUserTypes,
   },
 };
 
