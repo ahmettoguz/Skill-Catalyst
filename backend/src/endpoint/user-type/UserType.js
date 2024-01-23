@@ -11,7 +11,9 @@ class UserType {
       return ExpressService.returnResponse(res, 500, "Internal server error!");
     }
 
-    return ExpressService.returnResponse(res, 200, "user types", users);
+    return ExpressService.returnResponse(res, 200, "get user types", {
+      userTypes: users.data,
+    });
   }
 
   static async getUserAsParameter(req, res) {

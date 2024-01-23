@@ -4,7 +4,7 @@ const model = require("../../../model/model");
 class Read {
   static async getUserTypes() {
     try {
-      const readObjects = await model.UserType.find({}).lean;
+      const readObjects = await model.UserType.find().lean();
 
       // return found objects
       return { state: true, data: readObjects };
