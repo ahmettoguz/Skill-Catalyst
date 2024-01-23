@@ -8,6 +8,7 @@ const endpoint = require("../../endpoint/endpoint");
 // get
 router.route("/").get(endpoint.userType.getUserTypes);
 router.route("/limited").get(endpoint.userType.getUserTypesLimited);
+router.route("/:id").get(endpoint.userType.getUserType);
 
 // post
 router.route("/").post(endpoint.userType.createUserType);
@@ -16,6 +17,4 @@ router.route("/create").post(endpoint.userType.createUserType);
 router.route("/update").post(endpoint.userType.updateUserType);
 router.route("/update-many").post(endpoint.userType.updateUserTypeMany);
 
-// root
-router.route("/:id").get(endpoint.userType.getUserType);
 module.exports = router;
