@@ -7,7 +7,8 @@ class Read {
     try {
       // get user info with tier, I use lean because want to remove password. Lean does converting mongoose doc to js object
       const user: any = await model.User.findOne({ _id: userId })
-        .populate("tier")
+        .populate("tier", "name price")
+        .select("product quantity")
         .lean();
       // remove password
       delete user.password;
