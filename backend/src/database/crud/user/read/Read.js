@@ -39,7 +39,9 @@ class Read {
   static async readUserById(id) {
     try {
       // lean does converting mongoose doc to js object
-      const readObject = await model.User.findOne({ _id: id }).populate({ path: "user_type" }).lean();
+      const readObject = await model.User.findOne({ _id: id })
+        .populate({ path: "user_type" })
+        .lean();
 
       // return found object
       return { state: true, data: readObject };
@@ -49,10 +51,12 @@ class Read {
     }
   }
 
-  static async readUserBy(type) {
+  static async readUserByEmail(email) {
     try {
       // lean does converting mongoose doc to js object
-      const readObject = await model.UserType.findOne({ type: type }).lean();
+      const readObject = await model.User.findOne({ email: email })
+        .populate({ path: "user_type" })
+        .lean();
 
       // return found object
       return { state: true, data: readObject };

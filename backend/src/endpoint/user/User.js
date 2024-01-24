@@ -1,6 +1,7 @@
 const UserHelper = require("../../helper/user/UserHelper");
 const ExpressService = require("../../service/ExpressService");
 const EncryptionService = require("../../service/EncryptionService");
+const LogService = require("../../service/LogService");
 
 const crud = require("../../database/crud/crud");
 
@@ -78,7 +79,7 @@ class User {
     const sort = req.query.sort;
     const limit = req.query.limit;
 
-    // get user types from database
+    // get users from database
     const users = await crud.user.Read.readUsersLimited(sort, limit);
 
     // check
@@ -104,27 +105,7 @@ class User {
     // get id from router parameter
     const id = req.params.id;
 
-    // get user types from database
-    const user = await crud.user.Read.readUserById(id);
-
-    // check
-    if (!user.state) {
-      return ExpressService.returnResponse(res, 500, "Internal server error!");
-    }
-
-    // arrange data format
-    UserHelper.arrangeData(user.data);
-
-    return ExpressService.returnResponse(res, 200, "read user success", {
-      user: user,
-    });
-  }
-
-  static async readUserByEmail(req, res) {
-    // get id from router parameter
-    const email = req.body.email;
-
-    // get user types from database
+    // get user from database
     const user = await crud.user.Read.readUserById(id);
 
     // check
