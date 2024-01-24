@@ -9,7 +9,9 @@ class User {
   static async createUser(req, res) {
     // get type with name and convert it to id, to insert with it
     const userTypeInput = req.body.type;
-    const userType = await crud.userTypes.Read.getUserTypeByType(userTypeInput);
+    const userType = await crud.userTypes.Read.readUserTypeByType(
+      userTypeInput
+    );
 
     // check user type
     if (!userType.data)
@@ -52,20 +54,26 @@ class User {
   // --------------------------------------------- Read
   static async readUsers(req, res) {
     // get users from database
-    const users = await crud.user.Read.getUsers();
+    const users = await crud.user.Read.readUsers();
 
-    // remove password key
-    UtilService.removeKeysFromArrayOfObj(users.data.users, ["password"]);
-
-    // check
+    // check read operation
     if (!users.state) {
       return ExpressService.returnResponse(res, 500, "Internal server error!");
     }
 
+    // arrange populated data by excluding unnecessary key-values
+    users.data.users.forEach((obj) => {
+      obj.user_type = obj.user_type.type;
+    });
+
+    // remove password key
+    UtilService.removeKeysFromArrayOfObj(users.data.users, ["password"]);
+
+    // return response
     return ExpressService.returnResponse(
       res,
       200,
-      "get users success",
+      "read users success",
       users.data
     );
   }
@@ -76,7 +84,7 @@ class User {
     const limit = req.query.limit;
 
     // get user types from database
-    const userTypes = await crud.userTypes.Read.getUserTypesLimited(
+    const userTypes = await crud.userTypes.Read.readUserTypesLimited(
       sort,
       limit
     );
@@ -89,7 +97,7 @@ class User {
     return ExpressService.returnResponse(
       res,
       200,
-      "get limited user types success",
+      "read limited user types success",
       {
         userTypes: userTypes.data,
       }
@@ -101,14 +109,14 @@ class User {
     const id = req.params.id;
 
     // get user types from database
-    const userType = await crud.userTypes.Read.getUserType(id);
+    const userType = await crud.userTypes.Read.readUserTypeById(id);
 
     // check
     if (!userType.state) {
       return ExpressService.returnResponse(res, 500, "Internal server error!");
     }
 
-    return ExpressService.returnResponse(res, 200, "get user type success", {
+    return ExpressService.returnResponse(res, 200, "read user type success", {
       userType: userType.data,
     });
   }

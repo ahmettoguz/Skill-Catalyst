@@ -8,7 +8,7 @@ const endpoint = require("../../endpoint/endpoint");
 // get
 router.route("/").get(endpoint.userType.readUserTypes);
 router.route("/limited").get(endpoint.userType.readUserTypesLimited); // ?sort=asc&limit=5
-router.route("/:id").get(endpoint.userType.read );
+router.route("/:id").get(endpoint.userType.readUserTypeById);
 
 // post
 router.route("/create").post(endpoint.userType.createUserType);

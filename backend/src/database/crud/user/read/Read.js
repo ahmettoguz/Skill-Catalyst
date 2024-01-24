@@ -2,10 +2,12 @@ const LogService = require("../../../../service/LogService");
 const model = require("../../../model/model");
 
 class Read {
-  static async getUsers() {
+  static async readUsers() {
     try {
       const count = await model.User.countDocuments();
-      const readObjects = await model.User.find().lean();
+      const readObjects = await model.User.find()
+        .populate({ path: "user_type" })
+        .lean();
 
       // return found objects
       return { state: true, data: { users: readObjects, count } };
@@ -15,7 +17,7 @@ class Read {
     }
   }
 
-  static async getUsersLimited(sort, limit) {
+  static async readUsersLimited(sort, limit) {
     // convert sort
     sort = sort == "asc" ? 1 : -1;
 
@@ -33,7 +35,7 @@ class Read {
     }
   }
 
-  static async getUserById(id) {
+  static async readUserById(id) {
     console.log("buraya geldi");
     try {
       // lean does converting mongoose doc to js object
@@ -47,7 +49,7 @@ class Read {
     }
   }
 
-  static async getUserBy(type) {
+  static async readUserBy(type) {
     try {
       // lean does converting mongoose doc to js object
       const readObject = await model.UserType.findOne({ type: type }).lean();
