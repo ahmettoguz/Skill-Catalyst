@@ -1,27 +1,8 @@
+const UserHelper = require("../../helper/user/UserHelper");
 const ExpressService = require("../../service/ExpressService");
 const EncryptionService = require("../../service/EncryptionService");
-const LogService = require("../../service/LogService");
-const UtilService = require("../../service/UtilService");
+
 const crud = require("../../database/crud/crud");
-
-function arrangeDatas(arrayOfObjects) {
-  // arrange populated data by excluding unnecessary key-values
-  arrayOfObjects.forEach((obj) => {
-    obj.user_type = obj.user_type.type;
-  });
-
-  // remove password key
-  UtilService.removeKeysFromArrayOfObj(arrayOfObjects, ["password"]);
-}
-
-function arrangeData(object) {
-  // arrange populated data by excluding unnecessary key-values
-  console.log(object);
-  object.user_type = object.user_type.type;
-
-  // remove password key
-  delete object["password"];
-}
 
 class User {
   // --------------------------------------------- Create
@@ -81,7 +62,7 @@ class User {
     }
 
     // arrange data format
-    arrangeDatas(users.data.users);
+    UserHelper.arrangeDatas(users.data.users);
 
     // return response
     return ExpressService.returnResponse(
@@ -106,7 +87,7 @@ class User {
     }
 
     // arrange data format
-    arrangeDatas(users.data);
+    UserHelper.arrangeDatas(users.data);
 
     return ExpressService.returnResponse(
       res,
@@ -132,7 +113,27 @@ class User {
     }
 
     // arrange data format
-    arrangeData(user.data);
+    UserHelper.arrangeData(user.data);
+
+    return ExpressService.returnResponse(res, 200, "read user success", {
+      user: user,
+    });
+  }
+
+  static async readUserByEmail(req, res) {
+    // get id from router parameter
+    const email = req.body.email;
+
+    // get user types from database
+    const user = await crud.user.Read.readUserById(id);
+
+    // check
+    if (!user.state) {
+      return ExpressService.returnResponse(res, 500, "Internal server error!");
+    }
+
+    // arrange data format
+    UserHelper.arrangeData(user.data);
 
     return ExpressService.returnResponse(res, 200, "read user success", {
       user: user,
