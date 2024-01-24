@@ -1,19 +1,37 @@
 const ExpressService = require("../../service/ExpressService");
+const EncryptionService = require("../../service/EncryptionService");
 const crud = require("../../database/crud/crud");
 
 class User {
   // --------------------------------------------- Create
   static async createUser(req, res) {
     // get type with name and convert it to id, to insert with it
-    const userType = req.body.type;
-    const userTypeId = (await crud.userTypes.Read.getUserTypeByType(userType)).data._id;
+    const userTypeInput = req.body.type;
+    const userType = await crud.userTypes.Read.getUserTypeByType(userTypeInput);
+
+    // check user type
+    if (!userType.data)
+      return ExpressService.returnResponse(res, 400, "Invalid user type");
+
+    // set user type
+    const userTypeId = userType.data._id;
+
+    // encrypt password
+    const encyrptionOperation = await EncryptionService.encyrptText(
+      req.body.password
+    );
+
+    // check encryption
+    if (!encyrptionOperation.state)
+      return ExpressService.returnResponse(res, 500, "Internal server error!");
 
     // create new object
     const newUser = {
       user_type: userTypeId,
       name: req.body.name,
       email: req.body.email,
-      password: req.body.password,
+      password: encyrptionOperation.hash,
+      gender: req.body.gender,
     };
 
     // insert new object
@@ -24,12 +42,9 @@ class User {
       return ExpressService.returnResponse(res, 500, "Internal server error!");
     }
 
-    return ExpressService.returnResponse(
-      res,
-      200,
-      "user create success",
-      { id: insertOperation.insertedId }
-    );
+    return ExpressService.returnResponse(res, 200, "user create success", {
+      id: insertOperation.insertedId,
+    });
   }
 
   // --------------------------------------------- Read

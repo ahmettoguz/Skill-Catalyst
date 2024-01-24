@@ -92,10 +92,10 @@ function crateUser(e) {
   console.log("crateUser");
 
   const ajaxData = {
-    type: "mentor",
-    name: "ahmet",
-    email: "ahmet@hotmail.com",
-    password: 1234,
+    type: "mentee",
+    name: "hazal",
+    email: "hazal@hotmail.com",
+    password: "1234",
   };
 
   beforeSubmit();

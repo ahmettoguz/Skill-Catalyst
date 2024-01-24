@@ -20,7 +20,7 @@ class UserType {
     return ExpressService.returnResponse(
       res,
       200,
-      "user type is crated successfully",
+      "user type create success",
       { id: insertOperation.insertedId }
     );
   }

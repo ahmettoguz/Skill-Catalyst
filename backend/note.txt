@@ -26,5 +26,6 @@ Uninstall Dependencies:
     npm rm express
 ------------------------------------------------------------
 
-check route file for how to use location params
+Using local param:
+    check route file for how to use location params
 ------------------------------------------------------------
