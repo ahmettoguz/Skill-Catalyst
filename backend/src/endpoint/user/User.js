@@ -4,6 +4,16 @@ const LogService = require("../../service/LogService");
 const UtilService = require("../../service/UtilService");
 const crud = require("../../database/crud/crud");
 
+function arrangeData(arrayOfObjects) {
+  // arrange populated data by excluding unnecessary key-values
+  arrayOfObjects.forEach((obj) => {
+    obj.user_type = obj.user_type.type;
+  });
+
+  // remove password key
+  UtilService.removeKeysFromArrayOfObj(arrayOfObjects, ["password"]);
+}
+
 class User {
   // --------------------------------------------- Create
   static async createUser(req, res) {
@@ -61,13 +71,8 @@ class User {
       return ExpressService.returnResponse(res, 500, "Internal server error!");
     }
 
-    // arrange populated data by excluding unnecessary key-values
-    users.data.users.forEach((obj) => {
-      obj.user_type = obj.user_type.type;
-    });
-
-    // remove password key
-    UtilService.removeKeysFromArrayOfObj(users.data.users, ["password"]);
+    // arrange data format
+    arrangeData(users.data.users);
 
     // return response
     return ExpressService.returnResponse(
@@ -84,22 +89,23 @@ class User {
     const limit = req.query.limit;
 
     // get user types from database
-    const userTypes = await crud.userTypes.Read.readUserTypesLimited(
-      sort,
-      limit
-    );
+    const users = await crud.user.Read.readUsersLimited(sort, limit);
 
     // check
-    if (!userTypes.state) {
+    if (!users.state) {
       return ExpressService.returnResponse(res, 500, "Internal server error!");
     }
+
+    // arrange data format
+    arrangeData(users.data);
 
     return ExpressService.returnResponse(
       res,
       200,
       "read limited user types success",
       {
-        userTypes: userTypes.data,
+        users: users.data,
+        count: limit,
       }
     );
   }

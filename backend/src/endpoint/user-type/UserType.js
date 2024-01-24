@@ -17,12 +17,9 @@ class UserType {
       return ExpressService.returnResponse(res, 500, "Internal server error!");
     }
 
-    return ExpressService.returnResponse(
-      res,
-      200,
-      "user type create success",
-      { id: insertOperation.insertedId }
-    );
+    return ExpressService.returnResponse(res, 200, "user type create success", {
+      id: insertOperation.insertedId,
+    });
   }
 
   // --------------------------------------------- Read
@@ -38,32 +35,6 @@ class UserType {
     return ExpressService.returnResponse(res, 200, "read user types success", {
       userTypes: userTypes.data.userTypes,
     });
-  }
-
-  static async readUserTypesLimited(req, res) {
-    // get variables from query string
-    const sort = req.query.sort;
-    const limit = req.query.limit;
-
-    // get user types from database
-    const userTypes = await crud.userTypes.Read.readUserTypesLimited(
-      sort,
-      limit
-    );
-
-    // check
-    if (!userTypes.state) {
-      return ExpressService.returnResponse(res, 500, "Internal server error!");
-    }
-
-    return ExpressService.returnResponse(
-      res,
-      200,
-      "read limited user types success",
-      {
-        userTypes: userTypes.data,
-      }
-    );
   }
 
   static async readUserTypeById(req, res) {
@@ -151,9 +122,14 @@ class UserType {
       return ExpressService.returnResponse(res, 500, "Internal server error!");
     }
 
-    return ExpressService.returnResponse(res, 200, "user type deletes success", {
-      deletedCount: deleteOperation.deletedCount,
-    });
+    return ExpressService.returnResponse(
+      res,
+      200,
+      "user type deletes success",
+      {
+        deletedCount: deleteOperation.deletedCount,
+      }
+    );
   }
 }
 

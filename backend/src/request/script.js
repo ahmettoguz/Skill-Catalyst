@@ -139,6 +139,28 @@ function getUsers(e) {
   scrollToHeader();
 }
 
+const btngetlimitedUsers = document.getElementById("getlimitedUsers");
+btngetlimitedUsers.addEventListener("click", getlimitedUsers);
+function getlimitedUsers(e) {
+  console.log("getlimitedUsers");
+
+  beforeSubmit();
+
+  $.ajax({
+    url: `${url}/user/limited?sort=desc&limit=2`,
+    type: "get",
+    contentType: "application/json",
+    // data: JSON.stringify(ajaxData),
+
+    success: function (response) {
+      onSuccess(response);
+    },
+    error: function (response) {
+      onError(response);
+    },
+  });
+  scrollToHeader();
+}
 
 // user end
 
@@ -178,28 +200,6 @@ function getUserTypes(e) {
 
   $.ajax({
     url: `${url}/user-type/`,
-    type: "get",
-    contentType: "application/json",
-    // data: JSON.stringify(ajaxData),
-
-    success: function (response) {
-      onSuccess(response);
-    },
-    error: function (response) {
-      onError(response);
-    },
-  });
-  scrollToHeader();
-}
-
-const btngetlimitedUserTypes = document.getElementById("getlimitedUserTypes");
-btngetlimitedUserTypes.addEventListener("click", getlimitedUserTypes);
-function getlimitedUserTypes(e) {
-  console.log("getlimitedUserTypes");
-  beforeSubmit();
-
-  $.ajax({
-    url: `${url}/user-type/limited?sort=desc&limit=2`,
     type: "get",
     contentType: "application/json",
     // data: JSON.stringify(ajaxData),

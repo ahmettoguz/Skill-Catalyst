@@ -25,6 +25,7 @@ class Read {
       const readObjects = await model.User.find()
         .sort({ createdAt: sort })
         .limit(limit)
+        .populate({ path: "user_type" })
         .lean();
 
       // return found objects

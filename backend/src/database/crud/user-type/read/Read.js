@@ -15,24 +15,6 @@ class Read {
     }
   }
 
-  static async readUserTypesLimited(sort, limit) {
-    // convert sort
-    sort = sort == "asc" ? 1 : -1;
-
-    try {
-      const readObjects = await model.UserType.find()
-        .sort({ createdAt: sort })
-        .limit(limit)
-        .lean();
-
-      // return found objects
-      return { state: true, data: readObjects };
-    } catch (error) {
-      LogService.error(error);
-      return { state: false, error: error };
-    }
-  }
-
   static async readUserTypeById(id) {
     try {
       // lean does converting mongoose doc to js object
