@@ -1,45 +1,64 @@
+const LogService = require("../../../../service/LogService");
 const model = require("../../../model/model");
 
-// const jwt = require("jsonwebtoken");
-
 class Read {
-  // async getUser(userId) {
-  //   try {
-  //     // get user info with tier, I use lean because want to remove password. Lean does converting mongoose doc to js object
-  //     const user: any = await model.User.findOne({ _id: userId })
-  //       .populate("tier", "name price")
-  //       .select("product quantity")
-  //       .lean();
-  //     // remove password
-  //     delete user.password;
+  static async getUsers() {
+    try {
+      const count = await model.User.countDocuments();
+      const readObjects = await model.User.find().lean();
 
-  //     // get user tests
-  //     const tests = await this.getUserTests(userId);
-  //     user.tests = tests;
+      // return found objects
+      return { state: true, data: { users: readObjects, count } };
+    } catch (error) {
+      LogService.error(error);
+      return { state: false, error: error };
+    }
+  }
 
-  //     return user;
-  //   } catch (error) {
-  //     console.error("getUser: ", error);
-  //     return null;
-  //   }
-  // }
+  static async getUserTypesLimited(sort, limit) {
+    // convert sort
+    sort = sort == "asc" ? 1 : -1;
 
-  // async getUserTests(userId) {
-  //   try {
-  //     const tests = await model.Test.find({ user: userId });
+    try {
+      const readObjects = await model.UserType.find()
+        .sort({ createdAt: sort })
+        .limit(limit)
+        .lean();
 
-  //     // remove ids from result
-  //     const modifiedTests = tests.map((test) => {
-  //       const { _id, user, ...rest } = test.toObject();
-  //       return { ...rest, id: _id.toString() };
-  //     });
+      // return found objects
+      return { state: true, data: readObjects };
+    } catch (error) {
+      LogService.error(error);
+      return { state: false, error: error };
+    }
+  }
 
-  //     return modifiedTests;
-  //   } catch (error) {
-  //     console.error("getUserTests: ", error);
-  //     return null;
-  //   }
-  // }
+  static async getUserType(id) {
+    console.log("buraya geldi");
+    try {
+      // lean does converting mongoose doc to js object
+      const readObject = await model.UserType.findOne({ _id: id }).lean();
+
+      // return found object
+      return { state: true, data: readObject };
+    } catch (error) {
+      LogService.error(error);
+      return { state: false, error: error };
+    }
+  }
+
+  static async getUserTypeByType(type) {
+    try {
+      // lean does converting mongoose doc to js object
+      const readObject = await model.UserType.findOne({ type: type }).lean();
+
+      // return found object
+      return { state: true, data: readObject };
+    } catch (error) {
+      LogService.error(error);
+      return { state: false, error: error };
+    }
+  }
 }
 
 module.exports = Read;

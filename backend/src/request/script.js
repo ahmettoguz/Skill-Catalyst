@@ -116,43 +116,16 @@ function crateUser(e) {
   scrollToHeader();
 }
 
-const btngetUserQuery = document.getElementById("getUserQuery");
-btngetUserQuery.addEventListener("click", getUserQuery);
-function getUserQuery(e) {
-  console.log("getUserQuery");
-
-  // const ajaxData = {};
-
-  beforeSubmit();
-
-  $.ajax({
-    url: `${url}/user/userQuery?id=24`,
-    type: "GET",
-    contentType: "application/json",
-    // data: JSON.stringify(ajaxData),
-
-    success: function (response) {
-      onSuccess(response);
-    },
-    error: function (response) {
-      onError(response);
-    },
-  });
-  scrollToHeader();
-}
-
-const btnGetUsers = document.getElementById("getUsers");
-btnGetUsers.addEventListener("click", getUsers);
+const btngetUsers = document.getElementById("getUsers");
+btngetUsers.addEventListener("click", getUsers);
 function getUsers(e) {
   console.log("getUsers");
 
-  // const ajaxData = {};
-
   beforeSubmit();
 
   $.ajax({
-    url: `${url}/user/users`,
-    type: "GET",
+    url: `${url}/user`,
+    type: "get",
     contentType: "application/json",
     // data: JSON.stringify(ajaxData),
 
@@ -166,33 +139,7 @@ function getUsers(e) {
   scrollToHeader();
 }
 
-const btnaddUser = document.getElementById("addUser");
-btnaddUser.addEventListener("click", addUser);
-function addUser(e) {
-  console.log("addUser");
 
-  const ajaxData = {
-    email: "ahmet@hotmail.com",
-    password: "123",
-  };
-
-  beforeSubmit();
-
-  $.ajax({
-    url: `${url}/user/add-user`,
-    type: "post",
-    contentType: "application/json",
-    // data: JSON.stringify(ajaxData),
-
-    success: function (response) {
-      onSuccess(response);
-    },
-    error: function (response) {
-      onError(response);
-    },
-  });
-  scrollToHeader();
-}
 // user end
 
 // user type

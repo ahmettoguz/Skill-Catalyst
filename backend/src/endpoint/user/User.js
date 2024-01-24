@@ -1,5 +1,7 @@
 const ExpressService = require("../../service/ExpressService");
 const EncryptionService = require("../../service/EncryptionService");
+const LogService = require("../../service/LogService");
+const UtilService = require("../../service/UtilService");
 const crud = require("../../database/crud/crud");
 
 class User {
@@ -49,17 +51,23 @@ class User {
 
   // --------------------------------------------- Read
   static async readUsers(req, res) {
-    // get user types from database
-    const userTypes = await crud.userTypes.Read.getUserTypes();
+    // get users from database
+    const users = await crud.user.Read.getUsers();
+
+    // remove password key
+    UtilService.removeKeysFromArrayOfObj(users.data.users, ["password"]);
 
     // check
-    if (!userTypes.state) {
+    if (!users.state) {
       return ExpressService.returnResponse(res, 500, "Internal server error!");
     }
 
-    return ExpressService.returnResponse(res, 200, "get user types success", {
-      userTypes: userTypes.data.userTypes,
-    });
+    return ExpressService.returnResponse(
+      res,
+      200,
+      "get users success",
+      users.data
+    );
   }
 
   static async readUsersLimited(req, res) {

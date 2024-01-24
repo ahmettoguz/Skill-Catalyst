@@ -34,7 +34,6 @@ class Read {
   }
 
   static async getUserType(id) {
-    console.log("buraya geldi");
     try {
       // lean does converting mongoose doc to js object
       const readObject = await model.UserType.findOne({ _id: id }).lean();

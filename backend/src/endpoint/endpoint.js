@@ -25,7 +25,7 @@ const endpoint = {
     createUser: User.createUser,
 
     // Read
-    readUserTypes: UserType.readUserTypes,
+    readUsers: User.readUsers,
     readUserTypesLimited: UserType.readUserTypesLimited,
     readUserType: UserType.readUserType,
 

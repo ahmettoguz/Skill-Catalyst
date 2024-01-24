@@ -15,6 +15,13 @@ class LogService {
   static warning(text) {
     console.log("\x1b[33m%s\x1b[0m", `WARNING: ${text}`);
   }
+
+  static stringfy(jsObject) {
+    console.log(
+      "\x1b[33m%s\x1b[0m",
+      `LOG: ${JSON.stringify(jsObject, null, 3)}`
+    );
+  }
 }
 
 module.exports = LogService;
