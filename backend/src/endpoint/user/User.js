@@ -4,7 +4,7 @@ const LogService = require("../../service/LogService");
 const UtilService = require("../../service/UtilService");
 const crud = require("../../database/crud/crud");
 
-function arrangeData(arrayOfObjects) {
+function arrangeDatas(arrayOfObjects) {
   // arrange populated data by excluding unnecessary key-values
   arrayOfObjects.forEach((obj) => {
     obj.user_type = obj.user_type.type;
@@ -12,6 +12,15 @@ function arrangeData(arrayOfObjects) {
 
   // remove password key
   UtilService.removeKeysFromArrayOfObj(arrayOfObjects, ["password"]);
+}
+
+function arrangeData(object) {
+  // arrange populated data by excluding unnecessary key-values
+  console.log(object);
+  object.user_type = object.user_type.type;
+
+  // remove password key
+  delete object["password"];
 }
 
 class User {
@@ -72,7 +81,7 @@ class User {
     }
 
     // arrange data format
-    arrangeData(users.data.users);
+    arrangeDatas(users.data.users);
 
     // return response
     return ExpressService.returnResponse(
@@ -97,7 +106,7 @@ class User {
     }
 
     // arrange data format
-    arrangeData(users.data);
+    arrangeDatas(users.data);
 
     return ExpressService.returnResponse(
       res,
@@ -110,20 +119,23 @@ class User {
     );
   }
 
-  static async readUser(req, res) {
+  static async readUserById(req, res) {
     // get id from router parameter
     const id = req.params.id;
 
     // get user types from database
-    const userType = await crud.userTypes.Read.readUserTypeById(id);
+    const user = await crud.user.Read.readUserById(id);
 
     // check
-    if (!userType.state) {
+    if (!user.state) {
       return ExpressService.returnResponse(res, 500, "Internal server error!");
     }
 
-    return ExpressService.returnResponse(res, 200, "read user type success", {
-      userType: userType.data,
+    // arrange data format
+    arrangeData(user.data);
+
+    return ExpressService.returnResponse(res, 200, "read user success", {
+      user: user,
     });
   }
 

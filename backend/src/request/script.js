@@ -116,10 +116,10 @@ function crateUser(e) {
   scrollToHeader();
 }
 
-const btngetUsers = document.getElementById("getUsers");
-btngetUsers.addEventListener("click", getUsers);
-function getUsers(e) {
-  console.log("getUsers");
+const btnreadUsers = document.getElementById("readUsers");
+btnreadUsers.addEventListener("click", readUsers);
+function readUsers(e) {
+  console.log("readUsers");
 
   beforeSubmit();
 
@@ -139,15 +139,38 @@ function getUsers(e) {
   scrollToHeader();
 }
 
-const btngetlimitedUsers = document.getElementById("getlimitedUsers");
-btngetlimitedUsers.addEventListener("click", getlimitedUsers);
-function getlimitedUsers(e) {
-  console.log("getlimitedUsers");
+const btnreadlimitedUsers = document.getElementById("readlimitedUsers");
+btnreadlimitedUsers.addEventListener("click", readlimitedUsers);
+function readlimitedUsers(e) {
+  console.log("readlimitedUsers");
 
   beforeSubmit();
 
   $.ajax({
     url: `${url}/user/limited?sort=desc&limit=2`,
+    type: "get",
+    contentType: "application/json",
+    // data: JSON.stringify(ajaxData),
+
+    success: function (response) {
+      onSuccess(response);
+    },
+    error: function (response) {
+      onError(response);
+    },
+  });
+  scrollToHeader();
+}
+
+const btnreadUserById = document.getElementById("readUserById");
+btnreadUserById.addEventListener("click", readUserById);
+function readUserById(e) {
+  console.log("readUserById");
+
+  beforeSubmit();
+
+  $.ajax({
+    url: `${url}/user/65b0553934532581484c65e1`,
     type: "get",
     contentType: "application/json",
     // data: JSON.stringify(ajaxData),
@@ -192,10 +215,10 @@ function crateUserType(e) {
   scrollToHeader();
 }
 
-const btngetUserTypes = document.getElementById("getUserTypes");
-btngetUserTypes.addEventListener("click", getUserTypes);
-function getUserTypes(e) {
-  console.log("getUserTypes");
+const btnreadUserTypes = document.getElementById("readUserTypes");
+btnreadUserTypes.addEventListener("click", readUserTypes);
+function readUserTypes(e) {
+  console.log("readUserTypes");
   beforeSubmit();
 
   $.ajax({
@@ -214,10 +237,10 @@ function getUserTypes(e) {
   scrollToHeader();
 }
 
-const btngetUserType = document.getElementById("getUserType");
-btngetUserType.addEventListener("click", getUserType);
-function getUserType(e) {
-  console.log("getUserType");
+const btnreadUserType = document.getElementById("readUserType");
+btnreadUserType.addEventListener("click", readUserType);
+function readUserType(e) {
+  console.log("readUserType");
   beforeSubmit();
 
   $.ajax({

@@ -27,7 +27,7 @@ const endpoint = {
     // Read
     readUsers: User.readUsers,
     readUsersLimited: User.readUsersLimited,
-    readUserType: UserType.readUserType,
+    readUserById: User.readUserById,
 
     // Update
     updateUserType: UserType.updateUserType,
