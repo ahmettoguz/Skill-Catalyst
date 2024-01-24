@@ -2,7 +2,7 @@ const LogService = require("../../../../service/LogService");
 const model = require("../../../model/model");
 
 class Read {
-  static async getUserTypes() {
+  static async readUserTypes() {
     try {
       const count = await model.UserType.countDocuments();
       const readObjects = await model.UserType.find().lean();
@@ -15,7 +15,7 @@ class Read {
     }
   }
 
-  static async getUserTypesLimited(sort, limit) {
+  static async readUserTypesLimited(sort, limit) {
     // convert sort
     sort = sort == "asc" ? 1 : -1;
 
@@ -33,7 +33,7 @@ class Read {
     }
   }
 
-  static async getUserType(id) {
+  static async readUserType(id) {
     try {
       // lean does converting mongoose doc to js object
       const readObject = await model.UserType.findOne({ _id: id }).lean();
@@ -46,7 +46,7 @@ class Read {
     }
   }
 
-  static async getUserTypeByType(type) {
+  static async readUserTypeByType(type) {
     try {
       // lean does converting mongoose doc to js object
       const readObject = await model.UserType.findOne({ type: type }).lean();

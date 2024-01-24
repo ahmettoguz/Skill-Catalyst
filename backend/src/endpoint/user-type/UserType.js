@@ -28,14 +28,14 @@ class UserType {
   // --------------------------------------------- Read
   static async readUserTypes(req, res) {
     // get user types from database
-    const userTypes = await crud.userTypes.Read.getUserTypes();
+    const userTypes = await crud.userTypes.Read.readUserTypes();
 
     // check
     if (!userTypes.state) {
       return ExpressService.returnResponse(res, 500, "Internal server error!");
     }
 
-    return ExpressService.returnResponse(res, 200, "get user types success", {
+    return ExpressService.returnResponse(res, 200, "read user types success", {
       userTypes: userTypes.data.userTypes,
     });
   }
@@ -46,7 +46,7 @@ class UserType {
     const limit = req.query.limit;
 
     // get user types from database
-    const userTypes = await crud.userTypes.Read.getUserTypesLimited(
+    const userTypes = await crud.userTypes.Read.readUserTypesLimited(
       sort,
       limit
     );
@@ -59,7 +59,7 @@ class UserType {
     return ExpressService.returnResponse(
       res,
       200,
-      "get limited user types success",
+      "read limited user types success",
       {
         userTypes: userTypes.data,
       }
@@ -71,14 +71,14 @@ class UserType {
     const id = req.params.id;
 
     // get user types from database
-    const userType = await crud.userTypes.Read.getUserType(id);
+    const userType = await crud.userTypes.Read.readUserType(id);
 
     // check
     if (!userType.state) {
       return ExpressService.returnResponse(res, 500, "Internal server error!");
     }
 
-    return ExpressService.returnResponse(res, 200, "get user type success", {
+    return ExpressService.returnResponse(res, 200, "read user type success", {
       userType: userType.data,
     });
   }

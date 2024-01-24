@@ -15,7 +15,7 @@ class Read {
     }
   }
 
-  static async getUserTypesLimited(sort, limit) {
+  static async getUsersLimited(sort, limit) {
     // convert sort
     sort = sort == "asc" ? 1 : -1;
 
