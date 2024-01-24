@@ -8,6 +8,7 @@ const endpoint = require("../../endpoint/endpoint");
 // get
 router.route("/").get(endpoint.user.readUsers);
 router.route("/limited").get(endpoint.user.readUsersLimited); // ?sort=asc&limit=5
+router.route("/in-range").get(endpoint.user.readUsersInRange); // ?sort=asc&startRange=2&endRange=3
 router.route("/:id").get(endpoint.user.readUserById );
 
 // post

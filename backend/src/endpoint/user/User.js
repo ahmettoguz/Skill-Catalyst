@@ -101,6 +101,46 @@ class User {
     );
   }
 
+  static async readUsersInRange(req, res) {
+    // get variables from query string ?sort=asc&startRange=2&endRange=3
+    const sort = req.query.sort;
+    const startRange = req.query.startRange;
+    const endRange = req.query.endRange;
+
+    // check input
+    if (startRange >= endRange || startRange < 0 || endRange < 0)
+      return ExpressService.returnResponse(
+        res,
+        400,
+        "Invalid range specification!"
+      );
+
+    // get users from database
+    const users = await crud.user.Read.readUsersInRange(
+      sort,
+      startRange,
+      endRange
+    );
+
+    // check
+    if (!users.state) {
+      return ExpressService.returnResponse(res, 500, "Internal server error!");
+    }
+
+    // arrange data format
+    UserHelper.arrangeDatas(users.data);
+
+    return ExpressService.returnResponse(
+      res,
+      200,
+      "read limited user types success",
+      {
+        users: users.data,
+        count: users.data.length,
+      }
+    );
+  }
+
   static async readUserById(req, res) {
     // get id from router parameter
     const id = req.params.id;

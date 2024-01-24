@@ -36,6 +36,26 @@ class Read {
     }
   }
 
+  static async readUsersInRange(sort, startRange, endRange) {
+    // convert sort
+    sort = sort == "asc" ? 1 : -1;
+
+    try {
+      const readObjects = await model.User.find()
+        .sort({ createdAt: sort })
+        .skip(startRange)
+        .limit(endRange - startRange + 1)
+        .populate({ path: "user_type" })
+        .lean();
+
+      // return found objects
+      return { state: true, data: readObjects };
+    } catch (error) {
+      LogService.error(error);
+      return { state: false, error: error };
+    }
+  }
+
   static async readUserById(id) {
     try {
       // lean does converting mongoose doc to js object

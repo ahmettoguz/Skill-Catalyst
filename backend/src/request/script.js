@@ -185,6 +185,29 @@ function readUserById(e) {
   scrollToHeader();
 }
 
+const btnreadUsersInRange = document.getElementById("readUsersInRange");
+btnreadUsersInRange.addEventListener("click", readUsersInRange);
+function readUsersInRange(e) {
+  console.log("readUsersInRange");
+
+  beforeSubmit();
+
+  $.ajax({
+    url: `${url}/user/in-range?sort=asc&startRange=0&endRange=1`,
+    type: "get",
+    contentType: "application/json",
+    // data: JSON.stringify(ajaxData),
+
+    success: function (response) {
+      onSuccess(response);
+    },
+    error: function (response) {
+      onError(response);
+    },
+  });
+  scrollToHeader();
+}
+
 // user end
 
 // user type
