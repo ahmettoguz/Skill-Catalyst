@@ -66,12 +66,12 @@ class UserType {
     );
   }
 
-  static async readUserType(req, res) {
+  static async readUserTypeById(req, res) {
     // get id from router parameter
     const id = req.params.id;
 
     // get user types from database
-    const userType = await crud.userTypes.Read.readUserType(id);
+    const userType = await crud.userTypes.Read.readUserTypeById(id);
 
     // check
     if (!userType.state) {

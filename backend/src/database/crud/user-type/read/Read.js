@@ -33,7 +33,7 @@ class Read {
     }
   }
 
-  static async readUserType(id) {
+  static async readUserTypeById(id) {
     try {
       // lean does converting mongoose doc to js object
       const readObject = await model.UserType.findOne({ _id: id }).lean();

@@ -20,7 +20,7 @@ class Read {
     sort = sort == "asc" ? 1 : -1;
 
     try {
-      const readObjects = await model.UserType.find()
+      const readObjects = await model.User.find()
         .sort({ createdAt: sort })
         .limit(limit)
         .lean();
@@ -33,7 +33,7 @@ class Read {
     }
   }
 
-  static async getUserType(id) {
+  static async getUserById(id) {
     console.log("buraya geldi");
     try {
       // lean does converting mongoose doc to js object
@@ -47,7 +47,7 @@ class Read {
     }
   }
 
-  static async getUserTypeByType(type) {
+  static async getUserBy(type) {
     try {
       // lean does converting mongoose doc to js object
       const readObject = await model.UserType.findOne({ type: type }).lean();
