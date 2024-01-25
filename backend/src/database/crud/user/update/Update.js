@@ -26,21 +26,10 @@ class Update {
     }
   }
 
-  static async updateUsers(gender, newValues) {
+  static async updateUsers(filter, newValues) {
     try {
-      // set filter and new attributes
-      const filter = { gender: gender };
-      const newAttributes = {
-        user_type: newValues.user_type,
-
-        name: newValues.name,
-        email: newValues.email,
-        password: newValues.password,
-        gender: newValues.gender,
-      };
-
       // update user
-      const updateOperation = await model.User.updateMany(filter, newAttributes);
+      const updateOperation = await model.User.updateMany(filter, newValues);
 
       // return state
       return { state: true, updatedCount: updateOperation.modifiedCount };

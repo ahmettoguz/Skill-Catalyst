@@ -167,7 +167,6 @@ class User {
     const id = req.body.id;
 
     // convert type from name to id
-    // get type with name and convert it to id, to insert with it
     const userTypeInput = req.body.user_type;
     const userType = await crud.userTypes.Read.readUserTypeByType(
       userTypeInput
@@ -188,8 +187,6 @@ class User {
       gender: req.body.gender,
     };
 
-    console.log(id, newValues)
-
     // update user type from database
     const updateOperation = await crud.user.Update.updateUserById(
       id,
@@ -205,12 +202,19 @@ class User {
   }
 
   static async updateUsers(req, res) {
-    // get type from post body
-    const type = req.body.type;
-    
+    // set filter and new values
+    const filter = {
+      gender: req.body.filterGender,
+    };
+    const newValues = {
+      gender: req.body.newGender,
+    };
 
-    // update user types from database
-    const updateOperation = await crud.userTypes.Update.updateMany(type, req);
+    // update user type from database
+    const updateOperation = await crud.user.Update.updateUsers(
+      filter,
+      newValues
+    );
 
     // check
     if (!updateOperation.state) {
@@ -220,7 +224,7 @@ class User {
     return ExpressService.returnResponse(
       res,
       200,
-      "user type updates success",
+      "user updates success",
       {
         updatedCount: updateOperation.updatedCount,
       }

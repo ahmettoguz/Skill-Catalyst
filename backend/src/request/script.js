@@ -239,6 +239,33 @@ function updateUser(e) {
   scrollToHeader();
 }
 
+const btnupdateUsers = document.getElementById("updateUsers");
+btnupdateUsers.addEventListener("click", updateUsers);
+function updateUsers(e) {
+  console.log("updateUsers");
+  beforeSubmit();
+
+  ajaxData = {
+    filterGender: "none",
+    newGender: "male",
+  };
+
+  $.ajax({
+    url: `${url}/user/update-many`,
+    type: "post",
+    contentType: "application/json",
+    data: JSON.stringify(ajaxData),
+
+    success: function (response) {
+      onSuccess(response);
+    },
+    error: function (response) {
+      onError(response);
+    },
+  });
+  scrollToHeader();
+}
+
 // user end
 
 // user type
