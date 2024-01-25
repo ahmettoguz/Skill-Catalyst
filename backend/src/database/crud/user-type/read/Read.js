@@ -2,7 +2,7 @@ const LogService = require("../../../../service/LogService");
 const model = require("../../../model/model");
 
 class Read {
-  static async getUserTypes() {
+  static async readUserTypes() {
     try {
       const count = await model.UserType.countDocuments();
       const readObjects = await model.UserType.find().lean();
@@ -10,32 +10,12 @@ class Read {
       // return found objects
       return { state: true, data: { userTypes: readObjects, count } };
     } catch (error) {
-      const err = `crud / user-type / read / getUserTypes : ${error}`;
-      LogService.error(err);
-      return { state: false, error: err };
+      LogService.error(error);
+      return { state: false, error: error };
     }
   }
 
-  static async getUserTypesLimited(sort, limit) {
-    // convert sort
-    sort = sort == "asc" ? 1 : -1;
-
-    try {
-      const readObjects = await model.UserType.find()
-        .sort({ createdAt: sort })
-        .limit(limit)
-        .lean();
-
-      // return found objects
-      return { state: true, data: readObjects };
-    } catch (error) {
-      const err = `crud / user-type / read / getUserTypesLimited : ${error}`;
-      LogService.error(err);
-      return { state: false, error: err };
-    }
-  }
-
-  static async getUserType(id) {
+  static async readUserTypeById(id) {
     try {
       // lean does converting mongoose doc to js object
       const readObject = await model.UserType.findOne({ _id: id }).lean();
@@ -43,9 +23,21 @@ class Read {
       // return found object
       return { state: true, data: readObject };
     } catch (error) {
-      const err = `crud / user-type / read / getUserType : ${error}`;
-      LogService.error(err);
-      return { state: false, error: err };
+      LogService.error(error);
+      return { state: false, error: error };
+    }
+  }
+
+  static async readUserTypeByType(type) {
+    try {
+      // lean does converting mongoose doc to js object
+      const readObject = await model.UserType.findOne({ type: type }).lean();
+
+      // return found object
+      return { state: true, data: readObject };
+    } catch (error) {
+      LogService.error(error);
+      return { state: false, error: error };
     }
   }
 }

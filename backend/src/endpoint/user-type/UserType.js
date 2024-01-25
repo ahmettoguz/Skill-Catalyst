@@ -10,75 +10,46 @@ class UserType {
     };
 
     // insert new object
-    const insertOperation = await crud.userTypes.Create.insert(newUserType);
+    const insertOperation = await crud.userTypes.Create.create(newUserType);
 
     // check insertion operation
     if (!insertOperation.state) {
       return ExpressService.returnResponse(res, 500, "Internal server error!");
     }
 
-    return ExpressService.returnResponse(
-      res,
-      200,
-      "user type is crated successfully",
-      { id: insertOperation.insertedId }
-    );
+    return ExpressService.returnResponse(res, 200, "user type create success", {
+      id: insertOperation.insertedId,
+    });
   }
 
   // --------------------------------------------- Read
-  static async getUserTypes(req, res) {
+  static async readUserTypes(req, res) {
     // get user types from database
-    const userTypes = await crud.userTypes.Read.getUserTypes();
+    const userTypes = await crud.userTypes.Read.readUserTypes();
 
     // check
     if (!userTypes.state) {
       return ExpressService.returnResponse(res, 500, "Internal server error!");
     }
 
-    return ExpressService.returnResponse(res, 200, "get user types success", {
+    return ExpressService.returnResponse(res, 200, "read user types success", {
       userTypes: userTypes.data.userTypes,
     });
   }
 
-  static async getUserTypesLimited(req, res) {
-    // get variables from query string
-    const sort = req.query.sort;
-    const limit = req.query.limit;
-
-    // get user types from database
-    const userTypes = await crud.userTypes.Read.getUserTypesLimited(
-      sort,
-      limit
-    );
-
-    // check
-    if (!userTypes.state) {
-      return ExpressService.returnResponse(res, 500, "Internal server error!");
-    }
-
-    return ExpressService.returnResponse(
-      res,
-      200,
-      "get limited user types success",
-      {
-        userTypes: userTypes.data,
-      }
-    );
-  }
-
-  static async getUserType(req, res) {
+  static async readUserTypeById(req, res) {
     // get id from router parameter
     const id = req.params.id;
 
     // get user types from database
-    const userType = await crud.userTypes.Read.getUserType(id);
+    const userType = await crud.userTypes.Read.readUserTypeById(id);
 
     // check
     if (!userType.state) {
       return ExpressService.returnResponse(res, 500, "Internal server error!");
     }
 
-    return ExpressService.returnResponse(res, 200, "get user type success", {
+    return ExpressService.returnResponse(res, 200, "read user type success", {
       userType: userType.data,
     });
   }
@@ -99,7 +70,7 @@ class UserType {
     return ExpressService.returnResponse(res, 200, "user type update success");
   }
 
-  static async updateUserTypeMany(req, res) {
+  static async updateUserTypes(req, res) {
     // get type from post body
     const type = req.body.type;
 
@@ -151,9 +122,14 @@ class UserType {
       return ExpressService.returnResponse(res, 500, "Internal server error!");
     }
 
-    return ExpressService.returnResponse(res, 200, "user type deletes success", {
-      deletedCount: deleteOperation.deletedCount,
-    });
+    return ExpressService.returnResponse(
+      res,
+      200,
+      "user type deletes success",
+      {
+        deletedCount: deleteOperation.deletedCount,
+      }
+    );
   }
 }
 

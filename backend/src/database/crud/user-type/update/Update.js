@@ -14,9 +14,8 @@ class Update {
       // return state
       return { state: true };
     } catch (error) {
-      const err = `crud / user-type / update / updateOne : ${error}`;
-      LogService.error(err);
-      return { state: false, error: err };
+      LogService.error(error);
+      return { state: false, error: error };
     }
   }
 
@@ -32,9 +31,8 @@ class Update {
       // return state
       return { state: true, updatedCount: result.modifiedCount };
     } catch (error) {
-      const err = `crud / user-type / update / updateOne : ${error}`;
-      LogService.error(err);
-      return { state: false, error: err };
+      LogService.error(error);
+      return { state: false, error: error };
     }
   }
 }

@@ -2,7 +2,7 @@ const LogService = require("../../../../service/LogService");
 const model = require("../../../model/model");
 
 class Create {
-  static async insert(userType) {
+  static async create(userType) {
     try {
       const insertObject = await model.UserType.create({
         type: userType.type,
@@ -12,9 +12,8 @@ class Create {
       const insertedId = insertObject._id.toString();
       return { state: true, insertedId };
     } catch (error) {
-      const err = `crud / user-type / crate / insert : ${error}`;
-      LogService.error(err);
-      return { state: false, error: err };
+      LogService.error(error);
+      return { state: false, error: error };
     }
   }
 }
