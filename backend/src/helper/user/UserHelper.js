@@ -1,24 +1,29 @@
 const UtilService = require("../../service/UtilService");
+const LogService = require("../../service/LogService");
 
 const crud = require("../../database/crud/crud");
 
 class UserHelper {
   static arrangeDatas(arrayOfObjects) {
-    // arrange populated data by excluding unnecessary key-values
-    arrayOfObjects.forEach((obj) => {
-      obj.user_type = obj.user_type.type;
-    });
+    try {
+      // arrange populated data by excluding unnecessary key-values
+      arrayOfObjects.forEach((obj) => {
+        obj.user_type = obj.user_type.type;
+      });
 
-    // remove password key
-    UtilService.removeKeysFromArrayOfObj(arrayOfObjects, ["password"]);
+      // remove password key
+      UtilService.removeKeysFromArrayOfObj(arrayOfObjects, ["password"]);
+    } catch (error) {}
   }
 
   static arrangeData(object) {
-    // arrange populated data by excluding unnecessary key-values
-    object.user_type = object.user_type.type;
+    try {
+      // arrange populated data by excluding unnecessary key-values
+      object.user_type = object.user_type.type;
 
-    // remove password key
-    delete object["password"];
+      // remove password key
+      delete object["password"];
+    } catch (error) {}
   }
 
   static async readUserByEmail(email) {

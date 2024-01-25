@@ -266,6 +266,58 @@ function updateUsers(e) {
   scrollToHeader();
 }
 
+const btndeleteUser = document.getElementById("deleteUser");
+btndeleteUser.addEventListener("click", deleteUser);
+function deleteUser(e) {
+  console.log("deleteUser");
+  beforeSubmit();
+
+  ajaxData = {
+    id: "65b0553934532581484c65e1",
+  };
+
+  $.ajax({
+    url: `${url}/user/delete`,
+    type: "post",
+    contentType: "application/json",
+    data: JSON.stringify(ajaxData),
+
+    success: function (response) {
+      onSuccess(response);
+    },
+    error: function (response) {
+      onError(response);
+    },
+  });
+  scrollToHeader();
+}
+
+const btndeleteUsers = document.getElementById("deleteUsers");
+btndeleteUsers.addEventListener("click", deleteUsers);
+function deleteUsers(e) {
+  console.log("deleteUsers");
+  beforeSubmit();
+
+  ajaxData = {
+    gender: "none",
+  };
+
+  $.ajax({
+    url: `${url}/user/delete-many`,
+    type: "post",
+    contentType: "application/json",
+    data: JSON.stringify(ajaxData),
+
+    success: function (response) {
+      onSuccess(response);
+    },
+    error: function (response) {
+      onError(response);
+    },
+  });
+  scrollToHeader();
+}
+
 // user end
 
 // user type

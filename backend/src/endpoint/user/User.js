@@ -93,10 +93,10 @@ class User {
     return ExpressService.returnResponse(
       res,
       200,
-      "read limited user types success",
+      "read limited users success",
       {
         users: users.data,
-        count: limit,
+        count: users.data.length,
       }
     );
   }
@@ -133,7 +133,7 @@ class User {
     return ExpressService.returnResponse(
       res,
       200,
-      "read limited user types success",
+      "read in range users success",
       {
         users: users.data,
         count: users.data.length,
@@ -198,6 +198,15 @@ class User {
       return ExpressService.returnResponse(res, 500, "Internal server error!");
     }
 
+    // check
+    if (!updateOperation.updateOperation) {
+      return ExpressService.returnResponse(
+        res,
+        400,
+        "No user found with that specification!"
+      );
+    }
+
     return ExpressService.returnResponse(res, 200, "user update success");
   }
 
@@ -221,14 +230,17 @@ class User {
       return ExpressService.returnResponse(res, 500, "Internal server error!");
     }
 
-    return ExpressService.returnResponse(
-      res,
-      200,
-      "user updates success",
-      {
-        updatedCount: updateOperation.updatedCount,
-      }
-    );
+    // check
+    if (updateOperation.updatedCount == 0)
+      return ExpressService.returnResponse(
+        res,
+        400,
+        "No user with that specifications!"
+      );
+
+    return ExpressService.returnResponse(res, 200, "user updates success", {
+      updatedCount: updateOperation.updatedCount,
+    });
   }
 
   // --------------------------------------------- Delete
@@ -236,39 +248,54 @@ class User {
     // get id from post body
     const id = req.body.id;
 
-    // delete user type from database
-    const deleteOperation = await crud.userTypes.Delete.deleteOne(id);
+    // delete user from database
+    const deleteOperation = await crud.user.Delete.deleteOne(id);
 
     // check
     if (!deleteOperation.state) {
       return ExpressService.returnResponse(res, 500, "Internal server error!");
     }
 
-    return ExpressService.returnResponse(res, 200, "user type delete success", {
-      deletedObject: deleteOperation.deletedObject,
+    // check
+    if (!deleteOperation.deletedObject) {
+      return ExpressService.returnResponse(res, 400, "No user with that id!");
+    }
+
+    // arrange data format
+    UserHelper.arrangeData(deleteOperation.deletedObject);
+
+    // maybe just return the delete status instead of whole info because you need to handle relations.
+    return ExpressService.returnResponse(res, 200, "user delete success", {
+      // deletedObject: deleteOperation.deletedObject,
+      state: true,
     });
   }
 
   static async deleteUsers(req, res) {
-    // get type from post body
-    const type = req.body.type;
+    // get gender from post body and set filter
+    const filter = {
+      gender: req.body.gender,
+    };
 
-    // delete user type from database
-    const deleteOperation = await crud.userTypes.Delete.deleteMany(type);
+    // delete users from database
+    const deleteOperation = await crud.user.Delete.deleteMany(filter);
 
     // check
     if (!deleteOperation.state) {
       return ExpressService.returnResponse(res, 500, "Internal server error!");
     }
 
-    return ExpressService.returnResponse(
-      res,
-      200,
-      "user type deletes success",
-      {
-        deletedCount: deleteOperation.deletedCount,
-      }
-    );
+    // check
+    if (deleteOperation.deletedCount == 0)
+      return ExpressService.returnResponse(
+        res,
+        400,
+        "No user with that specifications!"
+      );
+
+    return ExpressService.returnResponse(res, 200, "user deletes success", {
+      deletedCount: deleteOperation.deletedCount,
+    });
   }
 }
 

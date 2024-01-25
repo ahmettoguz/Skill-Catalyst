@@ -16,10 +16,13 @@ class Update {
       };
 
       // update user
-      await model.User.findOneAndUpdate(filter, newAttributes);
+      const updateOperation = await model.User.findOneAndUpdate(
+        filter,
+        newAttributes
+      ).lean();
 
       // return state
-      return { state: true };
+      return { state: true, updateOperation };
     } catch (error) {
       LogService.error(error);
       return { state: false, error: error };
@@ -29,7 +32,10 @@ class Update {
   static async updateUsers(filter, newValues) {
     try {
       // update user
-      const updateOperation = await model.User.updateMany(filter, newValues);
+      const updateOperation = await model.User.updateMany(
+        filter,
+        newValues
+      ).lean();
 
       // return state
       return { state: true, updatedCount: updateOperation.modifiedCount };
