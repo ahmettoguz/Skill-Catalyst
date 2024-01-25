@@ -1,27 +1,52 @@
+const LogService = require("../../../../service/LogService");
 const model = require("../../../model/model");
 
 class Update {
-  static async updateUser(userId, req) {
-    // TODO add check to new attributes
+  static async updateUserById(id, newValues) {
     try {
+      // set filter and new attributes
+      const filter = { _id: id };
       const newAttributes = {
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        phone: req.body.phone,
-        profileBanner: req.body.profileBanner,
-        profilePicture: req.body.profilePicture,
-      };
-      const filter = { _id: userId };
+        user_type: newValues.user_type,
 
-      // TODO add check for newAttributes undefined null
+        name: newValues.name,
+        email: newValues.email,
+        password: newValues.password,
+        gender: newValues.gender,
+      };
 
       // update user
       await model.User.findOneAndUpdate(filter, newAttributes);
 
-      return true;
+      // return state
+      return { state: true };
     } catch (error) {
-      console.error("updateUser error: ", error);
-      return null;
+      LogService.error(error);
+      return { state: false, error: error };
+    }
+  }
+
+  static async updateUsers(gender, newValues) {
+    try {
+      // set filter and new attributes
+      const filter = { gender: gender };
+      const newAttributes = {
+        user_type: newValues.user_type,
+
+        name: newValues.name,
+        email: newValues.email,
+        password: newValues.password,
+        gender: newValues.gender,
+      };
+
+      // update user
+      const updateOperation = await model.User.updateMany(filter, newAttributes);
+
+      // return state
+      return { state: true, updatedCount: updateOperation.modifiedCount };
+    } catch (error) {
+      LogService.error(error);
+      return { state: false, error: error };
     }
   }
 }

@@ -163,23 +163,51 @@ class User {
 
   // --------------------------------------------- Update
   static async updateUser(req, res) {
-    // get id from post body
+    // get values from post body
     const id = req.body.id;
 
+    // convert type from name to id
+    // get type with name and convert it to id, to insert with it
+    const userTypeInput = req.body.user_type;
+    const userType = await crud.userTypes.Read.readUserTypeByType(
+      userTypeInput
+    );
+
+    // check user type
+    if (!userType.data)
+      return ExpressService.returnResponse(res, 400, "Invalid user type");
+
+    // set user type
+    const userTypeId = userType.data._id;
+
+    const newValues = {
+      user_type: userTypeId,
+
+      name: req.body.name,
+      email: req.body.email,
+      gender: req.body.gender,
+    };
+
+    console.log(id, newValues)
+
     // update user type from database
-    const updateOperation = await crud.userTypes.Update.updateOne(id, req);
+    const updateOperation = await crud.user.Update.updateUserById(
+      id,
+      newValues
+    );
 
     // check
     if (!updateOperation.state) {
       return ExpressService.returnResponse(res, 500, "Internal server error!");
     }
 
-    return ExpressService.returnResponse(res, 200, "user type update success");
+    return ExpressService.returnResponse(res, 200, "user update success");
   }
 
   static async updateUsers(req, res) {
     // get type from post body
     const type = req.body.type;
+    
 
     // update user types from database
     const updateOperation = await crud.userTypes.Update.updateMany(type, req);

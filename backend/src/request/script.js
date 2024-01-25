@@ -162,6 +162,29 @@ function readlimitedUsers(e) {
   scrollToHeader();
 }
 
+const btnreadUsersInRange = document.getElementById("readUsersInRange");
+btnreadUsersInRange.addEventListener("click", readUsersInRange);
+function readUsersInRange(e) {
+  console.log("readUsersInRange");
+
+  beforeSubmit();
+
+  $.ajax({
+    url: `${url}/user/in-range?sort=asc&startRange=0&endRange=1`,
+    type: "get",
+    contentType: "application/json",
+    // data: JSON.stringify(ajaxData),
+
+    success: function (response) {
+      onSuccess(response);
+    },
+    error: function (response) {
+      onError(response);
+    },
+  });
+  scrollToHeader();
+}
+
 const btnreadUserById = document.getElementById("readUserById");
 btnreadUserById.addEventListener("click", readUserById);
 function readUserById(e) {
@@ -185,18 +208,26 @@ function readUserById(e) {
   scrollToHeader();
 }
 
-const btnreadUsersInRange = document.getElementById("readUsersInRange");
-btnreadUsersInRange.addEventListener("click", readUsersInRange);
-function readUsersInRange(e) {
-  console.log("readUsersInRange");
-
+const btnupdateUser = document.getElementById("updateUser");
+btnupdateUser.addEventListener("click", updateUser);
+function updateUser(e) {
+  console.log("updateUser");
   beforeSubmit();
 
+  ajaxData = {
+    id: "65b0553934532581484c65e1",
+
+    user_type: "mentee",
+    name: "ahmo",
+    email: "ahmo@hotmail.com",
+    gender: "male",
+  };
+
   $.ajax({
-    url: `${url}/user/in-range?sort=asc&startRange=0&endRange=1`,
-    type: "get",
+    url: `${url}/user/update`,
+    type: "post",
     contentType: "application/json",
-    // data: JSON.stringify(ajaxData),
+    data: JSON.stringify(ajaxData),
 
     success: function (response) {
       onSuccess(response);

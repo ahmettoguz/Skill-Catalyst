@@ -31,12 +31,12 @@ const endpoint = {
     readUserById: User.readUserById,
 
     // Update
-    updateUserType: UserType.updateUserType,
-    updateUserTypes: UserType.updateUserTypes,
+    updateUser: User.updateUser,
+    updateUsers: User.updateUsers,
 
     // Delete
-    deleteUserType: UserType.deleteUserType,
-    deleteUserTypes: UserType.deleteUserTypes,
+    deleteUser: User.deleteUser,
+    deleteUsers: User.deleteUsers,
   },
 
   userType: {
