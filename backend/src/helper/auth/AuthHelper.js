@@ -1,17 +1,23 @@
 class AuthHelper {
-  static validateLoginInput(req) {
+  static handleInput(req) {
     const errors = [];
 
     // get inputs from post body
+    const { email, password } = req.body;
+
+    // check inputs undefined or null
+    if (!email || !password) {
+      errors.push({ key: "all", error: "invalid input" });
+      return { isValid: false, errors };
+    }
+
+    // trim fields
     const input = {
-      email: req.body.email.trim(),
-      password: req.body.password.trim(),
+      email: email.trim(),
+      password: password.trim(),
     };
 
-    // check inputs
     // check email
-    console.log(input.email);
-    console.log(input.email.length);
     if (input.email === undefined || input.email.length == 0)
       errors.push({ key: "email", error: "email required" });
 
@@ -20,8 +26,8 @@ class AuthHelper {
       errors.push({ key: "password", error: "password required" });
 
     // return result
-    const state = errors.length == 0 ? true : false;
-    return { state, errors };
+    const isValid = errors.length == 0 ? true : false;
+    return { isValid, errors, input };
   }
 }
 

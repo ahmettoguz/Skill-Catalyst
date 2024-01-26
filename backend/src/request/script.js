@@ -85,6 +85,53 @@ function test(e) {
 }
 // connection end
 
+// login
+const btnLogin = document.getElementById("login");
+btnLogin.addEventListener("click", login);
+function login(e) {
+  console.log("login");
+
+  const ajaxData = {
+    email: "ahmet@hotmail.com",
+    password: "123g4",
+  };
+
+  // const ajaxData = {};
+
+  // const ajaxData = {
+  //   email: undefined,
+  //   password: undefined,
+  // };
+
+  // const ajaxData = {
+  //   email: null,
+  //   password: null,
+  // };
+
+  // const ajaxData = {
+  //   email: "",
+  //   password: "",
+  // };
+
+  beforeSubmit();
+
+  $.ajax({
+    url: `${url}/auth/login`,
+    type: "post",
+    contentType: "application/json",
+    data: JSON.stringify(ajaxData),
+
+    success: function (response) {
+      onSuccess(response);
+    },
+    error: function (response) {
+      onError(response);
+    },
+  });
+  scrollToHeader();
+}
+// login end
+
 // user
 const btncrateUser = document.getElementById("crateUser");
 btncrateUser.addEventListener("click", crateUser);

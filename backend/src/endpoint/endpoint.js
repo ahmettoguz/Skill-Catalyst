@@ -17,7 +17,6 @@ const endpoint = {
 
   auth: {
     login: Auth.login,
-    logout: Auth.logout,
   },
 
   user: {
