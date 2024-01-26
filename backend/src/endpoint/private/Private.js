@@ -2,10 +2,10 @@ const ExpressService = require("../../service/ExpressService");
 
 class Private {
   static async privateMentee(req, res) {
-    ExpressService.returnResponse(res, 200, "private mentee");
+    return ExpressService.returnResponse(res, 200, "private mentee");
   }
   static async privateMentor(req, res) {
-    ExpressService.returnResponse(res, 200, "private mentor");
+    return ExpressService.returnResponse(res, 200, "private mentor");
   }
 }
 

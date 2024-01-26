@@ -139,10 +139,15 @@ function privateMentee(e) {
 
   beforeSubmit();
 
+  const jwt = "asdf";
+
   $.ajax({
     url: `${url}/private/mentee`,
     type: "get",
     contentType: "application/json",
+    headers: {
+      // Authorization: `Bearer ${jwt}`,
+    },
     // data: JSON.stringify(ajaxData),
 
     success: function (response) {

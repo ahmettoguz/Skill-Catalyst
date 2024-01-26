@@ -35,7 +35,7 @@ class Auth {
       return ExpressService.returnResponse(res, 400, "incorrect password!");
 
     // crate jwt token
-    const { state: jwtOperation, jwt } = await EncryptionService.signJwt({
+    const { state: jwtOperation, jwt } = EncryptionService.signJwt({
       id: user._id.toString(),
     });
 
