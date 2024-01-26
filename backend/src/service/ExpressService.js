@@ -1,7 +1,7 @@
 class ExpressService {
   static returnResponse(res, statusCode, message, data = null) {
     // ---- usage ----
-    // return ExpressService.returnResponse(res, 500, "Cannot verified that client connection to websocket.");
+    // return ExpressService.returnResponse(res, 500, "Cannot verified that client connection to websocket.","optional additional data");
     // return ExpressService.returnResponse(res, 200, "user informations sent", "optional additional data");
     // ---- usage end ----
 
