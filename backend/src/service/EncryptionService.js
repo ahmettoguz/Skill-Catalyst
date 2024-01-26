@@ -46,6 +46,22 @@ class EncryptionService {
       return { state: false, error };
     }
   }
+
+  static async validateJwt(data) {
+    try {
+      // generate jwt token for 1 day
+      const jwtDieTime = Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 1;
+      const jwtToken = jwt.sign(
+        { exp: jwtDieTime, data },
+        process.env.JWT_SECRET
+      );
+
+      return { state: true, jwt: `Bearer ${jwtToken}` };
+    } catch (error) {
+      LogService.error(error);
+      return { state: false, error };
+    }
+  }
 }
 
 module.exports = EncryptionService;

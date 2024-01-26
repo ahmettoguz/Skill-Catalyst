@@ -3,6 +3,7 @@ const Test = require("./test/Test");
 const Auth = require("./auth/Auth");
 const User = require("./user/User");
 const UserType = require("./user-type/UserType");
+const Private = require("./private/Private");
 
 // all endpoints
 const endpoint = {
@@ -54,6 +55,11 @@ const endpoint = {
     // Delete
     deleteUserType: UserType.deleteUserType,
     deleteUserTypes: UserType.deleteUserTypes,
+  },
+
+  private: {
+    privateMentee: Private.privateMentee,
+    privateMentor: Private.privateMentor,
   },
 };
 

@@ -83,6 +83,7 @@ function test(e) {
   });
   scrollToHeader();
 }
+
 // connection end
 
 // login
@@ -120,6 +121,52 @@ function login(e) {
     type: "post",
     contentType: "application/json",
     data: JSON.stringify(ajaxData),
+
+    success: function (response) {
+      onSuccess(response);
+    },
+    error: function (response) {
+      onError(response);
+    },
+  });
+  scrollToHeader();
+}
+
+const btnprivateMentee = document.getElementById("privateMentee");
+btnprivateMentee.addEventListener("click", privateMentee);
+function privateMentee(e) {
+  console.log("privateMentee");
+
+  beforeSubmit();
+
+  $.ajax({
+    url: `${url}/private/mentee`,
+    type: "get",
+    contentType: "application/json",
+    // data: JSON.stringify(ajaxData),
+
+    success: function (response) {
+      onSuccess(response);
+    },
+    error: function (response) {
+      onError(response);
+    },
+  });
+  scrollToHeader();
+}
+
+const btnprivateMentor = document.getElementById("privateMentor");
+btnprivateMentor.addEventListener("click", privateMentor);
+function privateMentor(e) {
+  console.log("privateMentor");
+
+  beforeSubmit();
+
+  $.ajax({
+    url: `${url}/private/mentor`,
+    type: "get",
+    contentType: "application/json",
+    // data: JSON.stringify(ajaxData),
 
     success: function (response) {
       onSuccess(response);
