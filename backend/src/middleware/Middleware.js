@@ -1,5 +1,7 @@
 const EncryptionService = require("../service/EncryptionService");
 const ExpressService = require("../service/ExpressService");
+const UserHelper = require("../helper/user/UserHelper");
+const crud = require("../database/crud/crud");
 
 function handleAuthorizationHeader(jwt) {
   // check header
@@ -20,29 +22,70 @@ function validateAll(req, res) {
 
   // check authorization header
   if (!headerState)
-    return ExpressService.returnResponse(
-      res,
-      400,
-      "authorization header missing!"
-    );
+    return {
+      state: false,
+      message: "authorization header missing!",
+      code: 400,
+    };
 
   // check jwt validity
-  const { state: jwtValidityState, error: jwtValidityError } =
-    EncryptionService.validateJwt(jwt);
+  const {
+    state: jwtValidityState,
+    error: jwtValidityError,
+    data,
+  } = EncryptionService.validateJwt(jwt);
 
-  if (!jwtValidityState)
-    return ExpressService.returnResponse(res, 400, "invalid jwt!", {
+  if (!jwtValidityState) {
+    return {
+      state: false,
+      message: "invalid jwt!",
       error: jwtValidityError,
-    });
+      code: 403,
+    };
+  }
 
-  return true;
+  return { state: true, data };
+}
+
+async function isMentee(data) {
+  const userId = data.data.id;
+  const { state, data: user } = await crud.user.Read.readUserById(userId);
+
+  // check state
+  if (!state || !user) return { state: false };
+
+  // arrange data format
+  UserHelper.arrangeData(user);
+
+  // check user type
+  if (user.user_type !== "mentee") return { state: false };
+
+  // return state
+  return { state: true, mentee: user };
 }
 
 class Middleware {
-  static authenticateMentee(req, res, next) {
+  static async authenticateMentee(req, res, next) {
     // make jwt authorization header validation and jwt validation
-    if (!validateAll(req, res)) return;
+    const {
+      state: validationState,
+      message,
+      error,
+      code,
+      data,
+    } = validateAll(req, res);
+    if (!validationState) {
+      return ExpressService.returnResponse(res, code, message, error);
+    }
 
+    // check user type
+    const { state, mentee } = await isMentee(data);
+
+    // check state
+    if (!state) return ExpressService.returnResponse(res, 403, "forbidden!");
+
+    // attach data to request for next operations
+    req.data = mentee;
     next();
   }
 }

@@ -93,8 +93,8 @@ function login(e) {
   console.log("login");
 
   const ajaxData = {
-    email: "ahmet@hotmail.com",
-    password: "123g4",
+    email: "sena@hotmail.com",
+    password: "1234",
   };
 
   // const ajaxData = {};
@@ -139,14 +139,15 @@ function privateMentee(e) {
 
   beforeSubmit();
 
-  const jwt = "asdf";
+  const jwt =
+    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDYzOTkyNzQsImRhdGEiOnsiaWQiOiI2NWIwNTZlMGQxNWQwMDMwNmIyNGM3MzgifSwiaWF0IjoxNzA2MzEyODc0fQ.tT9lWvXerNKm1sxhc3omDOKZJv0tzWX6F8ST3eo_UeE";
 
   $.ajax({
     url: `${url}/private/mentee`,
     type: "get",
     contentType: "application/json",
     headers: {
-      // Authorization: `Bearer ${jwt}`,
+      Authorization: jwt,
     },
     // data: JSON.stringify(ajaxData),
 
@@ -598,39 +599,3 @@ function deleteUserTypeMany(e) {
 }
 
 // user type end
-
-// login
-const loginForm = document.getElementById("loginForm");
-loginForm.addEventListener("submit", loginFormSubmit);
-function loginFormSubmit(e) {
-  e.preventDefault();
-  console.log("login");
-
-  const ajaxData = {
-    userName: $("#loginuserName").val(),
-    password: $("#loginpassword").val(),
-  };
-
-  beforeSubmit();
-  $.ajax({
-    url: `${url}/api/login`,
-    type: "POST",
-    headers: {
-      Authorization: localStorage.getItem("token"),
-    },
-    data: JSON.stringify(ajaxData),
-    contentType: "application/json",
-
-    success: function (response) {
-      // set token in localstorage because we cannot use cookie
-      localStorage.setItem("token", response.data.Authorization);
-
-      onSuccess(response);
-    },
-    error: function (response) {
-      onError(response);
-    },
-  });
-  scrollToHeader();
-}
-// login end
