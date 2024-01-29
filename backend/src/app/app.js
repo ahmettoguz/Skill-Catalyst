@@ -2,6 +2,10 @@
 const express = require("express");
 const app = express();
 
+// import env variables
+const dotenv = require("dotenv");
+dotenv.config();
+
 // database configurations
 const Mongo = require("../database/mongo/Mongo");
 Mongo.connectDatabase();
