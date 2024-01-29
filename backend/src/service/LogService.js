@@ -22,6 +22,14 @@ class LogService {
       `STRINGFY:\n${JSON.stringify(jsObject, null, 3)}`
     );
   }
+
+  static responseInfo(log) {
+    if (log.statusCode == 200)
+      console.log("\x1b[92m%s\x1b[0m", `${JSON.stringify(log)}`);
+    else if (log.statusCode == 500)
+      console.log("\x1b[31m%s\x1b[0m", `${JSON.stringify(log)}`);
+    else console.log("\x1b[33m%s\x1b[0m", `${JSON.stringify(log)}`);
+  }
 }
 
 module.exports = LogService;

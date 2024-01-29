@@ -13,6 +13,13 @@ app.use(bodyParser.json());
 const cors = require("cors");
 app.use(cors());
 
+// internal middleware configurations
+const isLoggingActive = process.env.LOG || "false";
+if (isLoggingActive === "true") {
+  const ExpressService = require("../service/ExpressService");
+  app.use(ExpressService.displayRequestInfo);
+}
+
 // router configurations
 const route = require("../router/root/route");
 route(app);

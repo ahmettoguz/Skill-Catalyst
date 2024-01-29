@@ -1,3 +1,5 @@
+const LogService = require("./LogService");
+
 class ExpressService {
   static returnResponse(res, statusCode, message, data = null) {
     // ---- usage ----
@@ -22,14 +24,20 @@ class ExpressService {
   }
 
   static displayRequestInfo(req, res, next) {
-    console.info(
-      `\n---------------- Incoming Request ----------------\n` +
-        `Endpoint: ${req.baseUrl}${req.url}\n` +
-        `Method  : ${req.method}\n` +
-        `IP      : ${req.connection.remoteAddress}\n` +
-        `Body    : ${JSON.stringify(req.body, null, 2)}\n` +
-        `--------------------------------------------------\n`
-    );
+    const start = Date.now();
+
+    res.on("finish", () => {
+      const duration = Date.now() - start;
+      const log = {
+        method: req.method.toLowerCase(),
+        endpoint: req.baseUrl + req.url,
+        ip: req.connection.remoteAddress,
+        statusCode: res.statusCode,
+        responseTime: duration,
+      };
+
+      LogService.responseInfo(log);
+    });
 
     next();
   }
