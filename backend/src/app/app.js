@@ -2,9 +2,12 @@
 const express = require("express");
 const app = express();
 
-// import env variables
+// configure dotenv middleware
 const dotenv = require("dotenv");
 dotenv.config();
+
+// import env variables
+const EnvService = require("../service/EnvService");
 
 // database configurations
 const Mongo = require("../database/mongo/Mongo");
@@ -18,8 +21,7 @@ const cors = require("cors");
 app.use(cors());
 
 // internal middleware configurations
-const isLoggingActive = process.env.LOG || "false";
-if (isLoggingActive === "true") {
+if (EnvService.isLoggingActive === "true") {
   const ExpressService = require("../service/ExpressService");
   app.use(ExpressService.displayRequestInfo);
 }
