@@ -140,7 +140,7 @@ function privateMentee(e) {
   beforeSubmit();
 
   const jwt =
-    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDYzOTkyNzQsImRhdGEiOnsiaWQiOiI2NWIwNTZlMGQxNWQwMDMwNmIyNGM3MzgifSwiaWF0IjoxNzA2MzEyODc0fQ.tT9lWvXerNKm1sxhc3omDOKZJv0tzWX6F8ST3eo_UeE";
+    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDY2NDkyNzYsImRhdGEiOnsiaWQiOiI2NWIwNTZlMGQxNWQwMDMwNmIyNGM3MzgifSwiaWF0IjoxNzA2NTYyODc2fQ.vsXl7G0glli5Q7pRiYxUw5RdB97UV1DlOKbbESaOyeY";
 
   $.ajax({
     url: `${url}/private/mentee`,
