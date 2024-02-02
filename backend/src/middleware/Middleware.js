@@ -88,6 +88,32 @@ class Middleware {
     req.data = mentee;
     next();
   }
+
+  static async authenticateMentor(req, res, next) {
+    // make jwt authorization header validation and jwt validation
+    const {
+      state: validationState,
+      message,
+      error,
+      code,
+      data,
+    } = validateAll(req, res);
+    if (!validationState) {
+      return ExpressService.returnResponse(res, code, message, error);
+    }
+
+    // ----------------- implement below
+
+    // check user type
+    const { state, mentee } = await isMentee(data);
+
+    // check state
+    if (!state) return ExpressService.returnResponse(res, 403, "forbidden!");
+
+    // attach data to request for next operations
+    req.data = mentee;
+    next();
+  }
 }
 
 module.exports = Middleware;
