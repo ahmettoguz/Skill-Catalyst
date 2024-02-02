@@ -14,7 +14,7 @@ function handleAuthorizationHeader(jwt) {
   return { state: true, jwt };
 }
 
-function validateAll(req, res) {
+function handleValidation(req, res) {
   // handle authorization header
   const { state: headerState, jwt } = handleAuthorizationHeader(
     req.headers.authorization
@@ -64,6 +64,23 @@ async function isMentee(data) {
   return { state: true, mentee: user };
 }
 
+async function isMentor(data) {
+  const userId = data.data.id;
+  const { state, data: user } = await crud.user.Read.readUserById(userId);
+
+  // check state
+  if (!state || !user) return { state: false };
+
+  // arrange data format
+  UserHelper.arrangeData(user);
+
+  // check user type
+  if (user.user_type !== "mentor") return { state: false };
+
+  // return state
+  return { state: true, mentor: user };
+}
+
 class Middleware {
   static async authenticateMentee(req, res, next) {
     // make jwt authorization header validation and jwt validation
@@ -73,7 +90,7 @@ class Middleware {
       error,
       code,
       data,
-    } = validateAll(req, res);
+    } = handleValidation(req, res);
     if (!validationState) {
       return ExpressService.returnResponse(res, code, message, error);
     }
@@ -97,15 +114,13 @@ class Middleware {
       error,
       code,
       data,
-    } = validateAll(req, res);
+    } = handleValidation(req, res);
     if (!validationState) {
       return ExpressService.returnResponse(res, code, message, error);
     }
 
-    // ----------------- implement below
-
     // check user type
-    const { state, mentee } = await isMentee(data);
+    const { state, mentor } = await isMentor(data);
 
     // check state
     if (!state) return ExpressService.returnResponse(res, 403, "forbidden!");
