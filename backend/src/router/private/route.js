@@ -9,6 +9,6 @@ const endpoint = require("../../endpoint/endpoint");
 
 // route to endpoints
 router.route("/mentee").get(Middleware.authenticateMentee, endpoint.private.privateMentee);
-router.route("/mentor").get(endpoint.private.privateMentor);
+router.route("/mentor").get(Middleware.authenticateMentor, endpoint.private.privateMentor);
 
 module.exports = router;

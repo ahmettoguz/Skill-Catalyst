@@ -126,7 +126,7 @@ class Middleware {
     if (!state) return ExpressService.returnResponse(res, 403, "forbidden!");
 
     // attach data to request for next operations
-    req.data = mentee;
+    req.data = mentor;
     next();
   }
 }
