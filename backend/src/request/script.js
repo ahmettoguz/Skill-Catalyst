@@ -83,6 +83,7 @@ function test(e) {
   });
   scrollToHeader();
 }
+
 // connection end
 
 // login
@@ -91,9 +92,16 @@ btnLogin.addEventListener("click", login);
 function login(e) {
   console.log("login");
 
+  // mentee
+  // const ajaxData = {
+  //   email: "sena@hotmail.com",
+  //   password: "1234",
+  // };
+
+  // mentor
   const ajaxData = {
     email: "ahmet@hotmail.com",
-    password: "123g4",
+    password: "1234",
   };
 
   // const ajaxData = {};
@@ -120,6 +128,63 @@ function login(e) {
     type: "post",
     contentType: "application/json",
     data: JSON.stringify(ajaxData),
+
+    success: function (response) {
+      onSuccess(response);
+    },
+    error: function (response) {
+      onError(response);
+    },
+  });
+  scrollToHeader();
+}
+
+const btnprivateMentee = document.getElementById("privateMentee");
+btnprivateMentee.addEventListener("click", privateMentee);
+function privateMentee(e) {
+  console.log("privateMentee");
+
+  beforeSubmit();
+
+  const jwt =
+    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDcwNDYyNTksImRhdGEiOnsiaWQiOiI2NWIwNTUzOTM0NTMyNTgxNDg0YzY1ZTEifSwiaWF0IjoxNzA2OTU5ODU5fQ.TdYnjM0DKocFNFXxUCBiuQUh25EvpQy5C42NRNgrUDg";
+  $.ajax({
+    url: `${url}/private/mentee`,
+    type: "get",
+    contentType: "application/json",
+    headers: {
+      Authorization: jwt,
+    },
+    // data: JSON.stringify(ajaxData),
+
+    success: function (response) {
+      onSuccess(response);
+    },
+    error: function (response) {
+      onError(response);
+    },
+  });
+  scrollToHeader();
+}
+
+const btnprivateMentor = document.getElementById("privateMentor");
+btnprivateMentor.addEventListener("click", privateMentor);
+function privateMentor(e) {
+  console.log("privateMentor");
+
+  beforeSubmit();
+
+  const jwt =
+    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDcwNDYyMTUsImRhdGEiOnsiaWQiOiI2NWIwNTUzOTM0NTMyNTgxNDg0YzY1ZTEifSwiaWF0IjoxNzA2OTU5ODE1fQ.GaCYWkn5ba9SlUzjOiS2Uh_VTEzB_4k5QHojhVl8X2M";
+
+  $.ajax({
+    url: `${url}/private/mentor`,
+    type: "get",
+    contentType: "application/json",
+    // data: JSON.stringify(ajaxData),
+    headers: {
+      Authorization: jwt,
+    },
 
     success: function (response) {
       onSuccess(response);
@@ -546,39 +611,3 @@ function deleteUserTypeMany(e) {
 }
 
 // user type end
-
-// login
-const loginForm = document.getElementById("loginForm");
-loginForm.addEventListener("submit", loginFormSubmit);
-function loginFormSubmit(e) {
-  e.preventDefault();
-  console.log("login");
-
-  const ajaxData = {
-    userName: $("#loginuserName").val(),
-    password: $("#loginpassword").val(),
-  };
-
-  beforeSubmit();
-  $.ajax({
-    url: `${url}/api/login`,
-    type: "POST",
-    headers: {
-      Authorization: localStorage.getItem("token"),
-    },
-    data: JSON.stringify(ajaxData),
-    contentType: "application/json",
-
-    success: function (response) {
-      // set token in localstorage because we cannot use cookie
-      localStorage.setItem("token", response.data.Authorization);
-
-      onSuccess(response);
-    },
-    error: function (response) {
-      onError(response);
-    },
-  });
-  scrollToHeader();
-}
-// login end

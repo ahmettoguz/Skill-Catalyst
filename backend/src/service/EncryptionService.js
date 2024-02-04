@@ -1,6 +1,7 @@
 const LogService = require("./LogService");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const EnvService = require("./EnvService");
 
 class EncryptionService {
   static async encyrptText(text) {
@@ -31,16 +32,26 @@ class EncryptionService {
     }
   }
 
-  static async signJwt(data) {
+  static signJwt(data) {
     try {
       // generate jwt token for 1 day
       const jwtDieTime = Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 1;
       const jwtToken = jwt.sign(
         { exp: jwtDieTime, data },
-        process.env.JWT_SECRET
+        EnvService.jwtSecret
       );
 
       return { state: true, jwt: `Bearer ${jwtToken}` };
+    } catch (error) {
+      LogService.error(error);
+      return { state: false, error };
+    }
+  }
+
+  static validateJwt(jwtToken) {
+    try {
+      const decoded = jwt.verify(jwtToken, EnvService.jwtSecret);
+      return { state: true, data: decoded };
     } catch (error) {
       LogService.error(error);
       return { state: false, error };

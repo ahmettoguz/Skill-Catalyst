@@ -1,15 +1,21 @@
-// import env variables
-const dotenv = require("dotenv");
-dotenv.config();
-
-// import app and server
-const http = require("http");
+// import app
 const app = require("./src/app/app.js");
+const HttpService = require("./src/service/HttpService.js");
 
-const port = process.env.PORT || 3000;
+// import environment variables
+const EnvService = require("./src/service/EnvService.js");
 
-const server = http.createServer(app);
+// create server
+let server;
+if (EnvService.isSslEnabled === "true") {
+  console.log("ssl enabled");
+} else {
+  server = HttpService.getServer(app);
+}
 
-server.listen(port);
+// listen server
+server.listen(EnvService.port);
 
-console.log(`Server is running on: http://localhost:${port}`);
+// display output
+const protocol = EnvService.isSslEnabled == true ? "https" : "http";
+console.log(`Server is running on: ${protocol}://localhost:${EnvService.port}`);

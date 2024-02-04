@@ -1,27 +1,33 @@
+// express import
 const express = require("express");
 const app = express();
 
-// database import and configurations
+// configure dotenv middleware
+const dotenv = require("dotenv");
+dotenv.config();
+
+// import env variables
+const EnvService = require("../service/EnvService");
+
+// database configurations
 const Mongo = require("../database/mongo/Mongo");
 Mongo.connectDatabase();
 
-// middleware imports
+// external middleware configurations
 const bodyParser = require("body-parser");
-const cors = require("cors");
-
-// middleware configurations
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+const cors = require("cors");
 app.use(cors());
 
-// router import
-const router = require("../router/router");
+// internal middleware configurations
+if (EnvService.isLoggingActive === "true") {
+  const ExpressService = require("../service/ExpressService");
+  app.use(ExpressService.displayRequestInfo);
+}
 
-// router configuration
-app.use("/health-check", router.healthCheck);
-app.use("/test", router.test);
-app.use("/auth", router.auth);
-app.use("/user", router.user);
-app.use("/user-type", router.userType);
+// router configurations
+const route = require("../router/root/route");
+route(app);
 
 module.exports = app;
