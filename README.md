@@ -41,7 +41,3 @@ docker inspect --format '{{.RestartCount}}' database-c
 
 docker compose down
 ---------------------------------
-Flow:
-
-app.js -> router.js -> endpoint.js -> crud.js -> specific crud.js
----------------------------------

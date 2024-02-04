@@ -92,8 +92,15 @@ btnLogin.addEventListener("click", login);
 function login(e) {
   console.log("login");
 
+  // mentee
+  // const ajaxData = {
+  //   email: "sena@hotmail.com",
+  //   password: "1234",
+  // };
+
+  // mentor
   const ajaxData = {
-    email: "sena@hotmail.com",
+    email: "ahmet@hotmail.com",
     password: "1234",
   };
 
@@ -140,8 +147,7 @@ function privateMentee(e) {
   beforeSubmit();
 
   const jwt =
-    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDY2NDkyNzYsImRhdGEiOnsiaWQiOiI2NWIwNTZlMGQxNWQwMDMwNmIyNGM3MzgifSwiaWF0IjoxNzA2NTYyODc2fQ.vsXl7G0glli5Q7pRiYxUw5RdB97UV1DlOKbbESaOyeY";
-
+    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDcwNDYyNTksImRhdGEiOnsiaWQiOiI2NWIwNTUzOTM0NTMyNTgxNDg0YzY1ZTEifSwiaWF0IjoxNzA2OTU5ODU5fQ.TdYnjM0DKocFNFXxUCBiuQUh25EvpQy5C42NRNgrUDg";
   $.ajax({
     url: `${url}/private/mentee`,
     type: "get",
@@ -168,11 +174,17 @@ function privateMentor(e) {
 
   beforeSubmit();
 
+  const jwt =
+    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDcwNDYyMTUsImRhdGEiOnsiaWQiOiI2NWIwNTUzOTM0NTMyNTgxNDg0YzY1ZTEifSwiaWF0IjoxNzA2OTU5ODE1fQ.GaCYWkn5ba9SlUzjOiS2Uh_VTEzB_4k5QHojhVl8X2M";
+
   $.ajax({
     url: `${url}/private/mentor`,
     type: "get",
     contentType: "application/json",
     // data: JSON.stringify(ajaxData),
+    headers: {
+      Authorization: jwt,
+    },
 
     success: function (response) {
       onSuccess(response);
