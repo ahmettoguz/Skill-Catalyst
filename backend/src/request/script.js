@@ -31,7 +31,7 @@ function beforeSubmit() {
 
 const domain = "localhost";
 const port = 3000;
-const url = `http://${domain}:${port}`;
+const url = `https://${domain}:${port}`;
 
 // connection
 const btnCheckServer = document.getElementById("checkServer");
@@ -147,7 +147,7 @@ function privateMentee(e) {
   beforeSubmit();
 
   const jwt =
-    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDcwNDYyNTksImRhdGEiOnsiaWQiOiI2NWIwNTUzOTM0NTMyNTgxNDg0YzY1ZTEifSwiaWF0IjoxNzA2OTU5ODU5fQ.TdYnjM0DKocFNFXxUCBiuQUh25EvpQy5C42NRNgrUDg";
+    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDgwNjYyOTMsImRhdGEiOnsiaWQiOiI2NWIwNTUzOTM0NTMyNTgxNDg0YzY1ZTEifSwiaWF0IjoxNzA3OTc5ODkzfQ.s4GB-bha2ZlbIeCB6recjC1njDFSMeOZVD0bzf_hhZ0";
   $.ajax({
     url: `${url}/private/mentee`,
     type: "get",
@@ -175,7 +175,7 @@ function privateMentor(e) {
   beforeSubmit();
 
   const jwt =
-    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDcwNDYyMTUsImRhdGEiOnsiaWQiOiI2NWIwNTUzOTM0NTMyNTgxNDg0YzY1ZTEifSwiaWF0IjoxNzA2OTU5ODE1fQ.GaCYWkn5ba9SlUzjOiS2Uh_VTEzB_4k5QHojhVl8X2M";
+    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDgwNjYyOTMsImRhdGEiOnsiaWQiOiI2NWIwNTUzOTM0NTMyNTgxNDg0YzY1ZTEifSwiaWF0IjoxNzA3OTc5ODkzfQ.s4GB-bha2ZlbIeCB6recjC1njDFSMeOZVD0bzf_hhZ0";
 
   $.ajax({
     url: `${url}/private/mentor`,

@@ -1,4 +1,4 @@
-const ExpressService = require("../../service/ExpressService");
+const ExpressUtility = require("../../utility/ExpressUtility");
 const crud = require("../../database/crud/crud");
 
 class UserType {
@@ -14,10 +14,10 @@ class UserType {
 
     // check insertion operation
     if (!insertOperation.state) {
-      return ExpressService.returnResponse(res, 500, "Internal server error!");
+      return ExpressUtility.returnResponse(res, 500, "Internal server error!");
     }
 
-    return ExpressService.returnResponse(res, 200, "user type create success", {
+    return ExpressUtility.returnResponse(res, 200, "user type create success", {
       id: insertOperation.insertedId,
     });
   }
@@ -29,10 +29,10 @@ class UserType {
 
     // check
     if (!userTypes.state) {
-      return ExpressService.returnResponse(res, 500, "Internal server error!");
+      return ExpressUtility.returnResponse(res, 500, "Internal server error!");
     }
 
-    return ExpressService.returnResponse(res, 200, "read user types success", {
+    return ExpressUtility.returnResponse(res, 200, "read user types success", {
       userTypes: userTypes.data.userTypes,
     });
   }
@@ -46,10 +46,10 @@ class UserType {
 
     // check
     if (!userType.state) {
-      return ExpressService.returnResponse(res, 500, "Internal server error!");
+      return ExpressUtility.returnResponse(res, 500, "Internal server error!");
     }
 
-    return ExpressService.returnResponse(res, 200, "read user type success", {
+    return ExpressUtility.returnResponse(res, 200, "read user type success", {
       userType: userType.data,
     });
   }
@@ -64,10 +64,10 @@ class UserType {
 
     // check
     if (!updateOperation.state) {
-      return ExpressService.returnResponse(res, 500, "Internal server error!");
+      return ExpressUtility.returnResponse(res, 500, "Internal server error!");
     }
 
-    return ExpressService.returnResponse(res, 200, "user type update success");
+    return ExpressUtility.returnResponse(res, 200, "user type update success");
   }
 
   static async updateUserTypes(req, res) {
@@ -79,10 +79,10 @@ class UserType {
 
     // check
     if (!updateOperation.state) {
-      return ExpressService.returnResponse(res, 500, "Internal server error!");
+      return ExpressUtility.returnResponse(res, 500, "Internal server error!");
     }
 
-    return ExpressService.returnResponse(
+    return ExpressUtility.returnResponse(
       res,
       200,
       "user type updates success",
@@ -102,10 +102,10 @@ class UserType {
 
     // check
     if (!deleteOperation.state) {
-      return ExpressService.returnResponse(res, 500, "Internal server error!");
+      return ExpressUtility.returnResponse(res, 500, "Internal server error!");
     }
 
-    return ExpressService.returnResponse(res, 200, "user type delete success", {
+    return ExpressUtility.returnResponse(res, 200, "user type delete success", {
       deletedObject: deleteOperation.deletedObject,
     });
   }
@@ -119,10 +119,10 @@ class UserType {
 
     // check
     if (!deleteOperation.state) {
-      return ExpressService.returnResponse(res, 500, "Internal server error!");
+      return ExpressUtility.returnResponse(res, 500, "Internal server error!");
     }
 
-    return ExpressService.returnResponse(
+    return ExpressUtility.returnResponse(
       res,
       200,
       "user type deletes success",

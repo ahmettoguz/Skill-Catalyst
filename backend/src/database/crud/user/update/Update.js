@@ -1,4 +1,4 @@
-const LogService = require("../../../../service/LogService");
+const LogUtility = require("../../../../utility/LogUtility");
 const model = require("../../../model/model");
 
 class Update {
@@ -24,7 +24,7 @@ class Update {
       // return state
       return { state: true, updateOperation };
     } catch (error) {
-      LogService.error(error);
+      LogUtility.error(error);
       return { state: false, error: error };
     }
   }
@@ -40,7 +40,7 @@ class Update {
       // return state
       return { state: true, updatedCount: updateOperation.modifiedCount };
     } catch (error) {
-      LogService.error(error);
+      LogUtility.error(error);
       return { state: false, error: error };
     }
   }

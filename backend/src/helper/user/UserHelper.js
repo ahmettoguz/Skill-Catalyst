@@ -1,5 +1,5 @@
-const UtilService = require("../../service/UtilService");
-const LogService = require("../../service/LogService");
+const CommonUtility = require("../../utility/CommonUtility");
+const LogUtility = require("../../utility/LogUtility");
 
 const crud = require("../../database/crud/crud");
 
@@ -12,7 +12,7 @@ class UserHelper {
       });
 
       // remove password key
-      UtilService.removeKeysFromArrayOfObj(arrayOfObjects, ["password"]);
+      CommonUtility.removeKeysFromArrayOfObj(arrayOfObjects, ["password"]);
     } catch (error) {}
   }
 

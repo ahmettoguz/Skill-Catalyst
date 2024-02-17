@@ -1,5 +1,5 @@
-const EncryptionService = require("../service/EncryptionService");
-const ExpressService = require("../service/ExpressService");
+const EncryptionUtility = require("../utility/EncryptionUtility");
+const ExpressUtility = require("../utility/ExpressUtility");
 const UserHelper = require("../helper/user/UserHelper");
 const crud = require("../database/crud/crud");
 
@@ -33,7 +33,7 @@ function handleValidation(req, res) {
     state: jwtValidityState,
     error: jwtValidityError,
     data,
-  } = EncryptionService.validateJwt(jwt);
+  } = EncryptionUtility.validateJwt(jwt);
 
   if (!jwtValidityState) {
     return {
@@ -92,14 +92,14 @@ class Middleware {
       data,
     } = handleValidation(req, res);
     if (!validationState) {
-      return ExpressService.returnResponse(res, code, message, error);
+      return ExpressUtility.returnResponse(res, code, message, error);
     }
 
     // check user type
     const { state, mentee } = await isMentee(data);
 
     // check state
-    if (!state) return ExpressService.returnResponse(res, 403, "forbidden!");
+    if (!state) return ExpressUtility.returnResponse(res, 403, "forbidden!");
 
     // attach data to request for next operations
     req.data = mentee;
@@ -116,14 +116,14 @@ class Middleware {
       data,
     } = handleValidation(req, res);
     if (!validationState) {
-      return ExpressService.returnResponse(res, code, message, error);
+      return ExpressUtility.returnResponse(res, code, message, error);
     }
 
     // check user type
     const { state, mentor } = await isMentor(data);
 
     // check state
-    if (!state) return ExpressService.returnResponse(res, 403, "forbidden!");
+    if (!state) return ExpressUtility.returnResponse(res, 403, "forbidden!");
 
     // attach data to request for next operations
     req.data = mentor;

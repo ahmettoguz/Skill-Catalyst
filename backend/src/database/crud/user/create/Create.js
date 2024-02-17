@@ -1,4 +1,4 @@
-const LogService = require("../../../../service/LogService");
+const LogUtility = require("../../../../utility/LogUtility");
 const model = require("../../../model/model");
 
 class Create {
@@ -10,7 +10,7 @@ class Create {
       const insertedId = insertObject._id.toString();
       return { state: true, insertedId };
     } catch (error) {
-      LogService.error(error);
+      LogUtility.error(error);
       return { state: false, error: error };
     }
   }

@@ -1,4 +1,4 @@
-const LogService = require("../../../../service/LogService");
+const LogUtility = require("../../../../utility/LogUtility");
 const model = require("../../../model/model");
 
 class Read {
@@ -10,7 +10,7 @@ class Read {
       // return found objects
       return { state: true, data: { userTypes: readObjects, count } };
     } catch (error) {
-      LogService.error(error);
+      LogUtility.error(error);
       return { state: false, error: error };
     }
   }
@@ -23,7 +23,7 @@ class Read {
       // return found object
       return { state: true, data: readObject };
     } catch (error) {
-      LogService.error(error);
+      LogUtility.error(error);
       return { state: false, error: error };
     }
   }
@@ -36,7 +36,7 @@ class Read {
       // return found object
       return { state: true, data: readObject };
     } catch (error) {
-      LogService.error(error);
+      LogUtility.error(error);
       return { state: false, error: error };
     }
   }

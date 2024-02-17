@@ -1,7 +1,7 @@
+const LogUtility = require("../../utility/LogUtility");
 const UserHelper = require("../../helper/user/UserHelper");
-const ExpressService = require("../../service/ExpressService");
-const EncryptionService = require("../../service/EncryptionService");
-const LogService = require("../../service/LogService");
+const ExpressUtility = require("../../utility/ExpressUtility");
+const EncryptionUtility = require("../../utility/EncryptionUtility");
 
 const crud = require("../../database/crud/crud");
 
@@ -16,19 +16,19 @@ class User {
 
     // check user type
     if (!userType.data)
-      return ExpressService.returnResponse(res, 400, "Invalid user type");
+      return ExpressUtility.returnResponse(res, 400, "Invalid user type");
 
     // set user type
     const userTypeId = userType.data._id;
 
     // encrypt password
-    const encyrptionOperation = await EncryptionService.encyrptText(
+    const encyrptionOperation = await EncryptionUtility.encyrptText(
       req.body.password
     );
 
     // check encryption
     if (!encyrptionOperation.state)
-      return ExpressService.returnResponse(res, 500, "Internal server error!");
+      return ExpressUtility.returnResponse(res, 500, "Internal server error!");
 
     // create new object
     const newUser = {
@@ -44,10 +44,10 @@ class User {
 
     // check insertion operation
     if (!insertOperation.state) {
-      return ExpressService.returnResponse(res, 500, "Internal server error!");
+      return ExpressUtility.returnResponse(res, 500, "Internal server error!");
     }
 
-    return ExpressService.returnResponse(res, 200, "user create success", {
+    return ExpressUtility.returnResponse(res, 200, "user create success", {
       id: insertOperation.insertedId,
     });
   }
@@ -59,14 +59,14 @@ class User {
 
     // check read operation
     if (!users.state) {
-      return ExpressService.returnResponse(res, 500, "Internal server error!");
+      return ExpressUtility.returnResponse(res, 500, "Internal server error!");
     }
 
     // arrange data format
     UserHelper.arrangeDatas(users.data.users);
 
     // return response
-    return ExpressService.returnResponse(
+    return ExpressUtility.returnResponse(
       res,
       200,
       "read users success",
@@ -84,13 +84,13 @@ class User {
 
     // check
     if (!users.state) {
-      return ExpressService.returnResponse(res, 500, "Internal server error!");
+      return ExpressUtility.returnResponse(res, 500, "Internal server error!");
     }
 
     // arrange data format
     UserHelper.arrangeDatas(users.data);
 
-    return ExpressService.returnResponse(
+    return ExpressUtility.returnResponse(
       res,
       200,
       "read limited users success",
@@ -109,7 +109,7 @@ class User {
 
     // check input
     if (startRange >= endRange || startRange < 0 || endRange < 0)
-      return ExpressService.returnResponse(
+      return ExpressUtility.returnResponse(
         res,
         400,
         "Invalid range specification!"
@@ -124,13 +124,13 @@ class User {
 
     // check
     if (!users.state) {
-      return ExpressService.returnResponse(res, 500, "Internal server error!");
+      return ExpressUtility.returnResponse(res, 500, "Internal server error!");
     }
 
     // arrange data format
     UserHelper.arrangeDatas(users.data);
 
-    return ExpressService.returnResponse(
+    return ExpressUtility.returnResponse(
       res,
       200,
       "read in range users success",
@@ -150,13 +150,13 @@ class User {
 
     // check
     if (!user.state) {
-      return ExpressService.returnResponse(res, 500, "Internal server error!");
+      return ExpressUtility.returnResponse(res, 500, "Internal server error!");
     }
 
     // arrange data format
     UserHelper.arrangeData(user.data);
 
-    return ExpressService.returnResponse(res, 200, "read user success", {
+    return ExpressUtility.returnResponse(res, 200, "read user success", {
       user: user,
     });
   }
@@ -174,7 +174,7 @@ class User {
 
     // check user type
     if (!userType.data)
-      return ExpressService.returnResponse(res, 400, "Invalid user type");
+      return ExpressUtility.returnResponse(res, 400, "Invalid user type");
 
     // set user type
     const userTypeId = userType.data._id;
@@ -195,19 +195,19 @@ class User {
 
     // check
     if (!updateOperation.state) {
-      return ExpressService.returnResponse(res, 500, "Internal server error!");
+      return ExpressUtility.returnResponse(res, 500, "Internal server error!");
     }
 
     // check
     if (!updateOperation.updateOperation) {
-      return ExpressService.returnResponse(
+      return ExpressUtility.returnResponse(
         res,
         400,
         "No user found with that specification!"
       );
     }
 
-    return ExpressService.returnResponse(res, 200, "user update success");
+    return ExpressUtility.returnResponse(res, 200, "user update success");
   }
 
   static async updateUsers(req, res) {
@@ -227,18 +227,18 @@ class User {
 
     // check
     if (!updateOperation.state) {
-      return ExpressService.returnResponse(res, 500, "Internal server error!");
+      return ExpressUtility.returnResponse(res, 500, "Internal server error!");
     }
 
     // check
     if (updateOperation.updatedCount == 0)
-      return ExpressService.returnResponse(
+      return ExpressUtility.returnResponse(
         res,
         400,
         "No user with that specifications!"
       );
 
-    return ExpressService.returnResponse(res, 200, "user updates success", {
+    return ExpressUtility.returnResponse(res, 200, "user updates success", {
       updatedCount: updateOperation.updatedCount,
     });
   }
@@ -253,19 +253,19 @@ class User {
 
     // check
     if (!deleteOperation.state) {
-      return ExpressService.returnResponse(res, 500, "Internal server error!");
+      return ExpressUtility.returnResponse(res, 500, "Internal server error!");
     }
 
     // check
     if (!deleteOperation.deletedObject) {
-      return ExpressService.returnResponse(res, 400, "No user with that id!");
+      return ExpressUtility.returnResponse(res, 400, "No user with that id!");
     }
 
     // arrange data format
     UserHelper.arrangeData(deleteOperation.deletedObject);
 
     // maybe just return the delete status instead of whole info because you need to handle relations.
-    return ExpressService.returnResponse(res, 200, "user delete success", {
+    return ExpressUtility.returnResponse(res, 200, "user delete success", {
       // deletedObject: deleteOperation.deletedObject,
       state: true,
     });
@@ -282,18 +282,18 @@ class User {
 
     // check
     if (!deleteOperation.state) {
-      return ExpressService.returnResponse(res, 500, "Internal server error!");
+      return ExpressUtility.returnResponse(res, 500, "Internal server error!");
     }
 
     // check
     if (deleteOperation.deletedCount == 0)
-      return ExpressService.returnResponse(
+      return ExpressUtility.returnResponse(
         res,
         400,
         "No user with that specifications!"
       );
 
-    return ExpressService.returnResponse(res, 200, "user deletes success", {
+    return ExpressUtility.returnResponse(res, 200, "user deletes success", {
       deletedCount: deleteOperation.deletedCount,
     });
   }
