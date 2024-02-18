@@ -1,8 +1,8 @@
-const ExpressService = require("../../service/ExpressService");
+const ExpressUtility = require("../../utility/ExpressUtility");
 
 class Test {
   static async test(req, res) {
-    return ExpressService.returnResponse(res, 200, "test");
+    return ExpressUtility.returnResponse(res, 200, "test");
   }
 }
 

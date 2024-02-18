@@ -1,9 +1,9 @@
-const LogService = require("./LogService");
+const LogUtility = require("../utility/LogUtility");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const EnvService = require("./EnvService");
+const EnvUtility = require("../utility/EnvUtility");
 
-class EncryptionService {
+class EncryptionUtility {
   static async encyrptText(text) {
     // convert to string
     text = text + "";
@@ -13,7 +13,7 @@ class EncryptionService {
       const hash = await bcrypt.hash(text, 10);
       return { state: true, hash };
     } catch (error) {
-      LogService.error(error);
+      LogUtility.error(error);
       return { state: false, error };
     }
   }
@@ -27,7 +27,7 @@ class EncryptionService {
 
       return { state: true };
     } catch (error) {
-      LogService.error(error);
+      LogUtility.error(error);
       return { state: false, error };
     }
   }
@@ -38,25 +38,25 @@ class EncryptionService {
       const jwtDieTime = Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 1;
       const jwtToken = jwt.sign(
         { exp: jwtDieTime, data },
-        EnvService.jwtSecret
+        EnvUtility.jwtSecret
       );
 
       return { state: true, jwt: `Bearer ${jwtToken}` };
     } catch (error) {
-      LogService.error(error);
+      LogUtility.error(error);
       return { state: false, error };
     }
   }
 
   static validateJwt(jwtToken) {
     try {
-      const decoded = jwt.verify(jwtToken, EnvService.jwtSecret);
+      const decoded = jwt.verify(jwtToken, EnvUtility.jwtSecret);
       return { state: true, data: decoded };
     } catch (error) {
-      LogService.error(error);
+      LogUtility.error(error);
       return { state: false, error };
     }
   }
 }
 
-module.exports = EncryptionService;
+module.exports = EncryptionUtility;

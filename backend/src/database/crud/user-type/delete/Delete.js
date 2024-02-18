@@ -1,4 +1,4 @@
-const LogService = require("../../../../service/LogService");
+const LogUtility = require("../../../../utility/LogUtility");
 const model = require("../../../model/model");
 
 class Delete {
@@ -13,7 +13,7 @@ class Delete {
       // return state
       return { state: true, deletedObject };
     } catch (error) {
-      LogService.error(error);
+      LogUtility.error(error);
       return { state: false, error: error };
     }
   }
@@ -33,7 +33,7 @@ class Delete {
         deletedCount: deletedObjects.deletedCount,
       };
     } catch (error) {
-      LogService.error(error);
+      LogUtility.error(error);
       return { state: false, error: error };
     }
   }

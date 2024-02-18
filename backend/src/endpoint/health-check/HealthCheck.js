@@ -1,12 +1,12 @@
-const ExpressService = require("../../service/ExpressService");
+const ExpressUtility = require("../../utility/ExpressUtility");
 
 class HealthCheck {
   static async backend(req, res) {
-    return ExpressService.returnResponse(res, 200, "Backend service is up.");
+    return ExpressUtility.returnResponse(res, 200, "Backend service is up.");
   }
 
   static async websocket(req, res) {
-    return ExpressService.returnResponse(res, 200, "Websocket service is up.");
+    return ExpressUtility.returnResponse(res, 200, "Websocket service is up.");
   }
 }
 

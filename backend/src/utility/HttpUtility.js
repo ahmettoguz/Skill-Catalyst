@@ -1,10 +1,10 @@
 // import server
 const http = require("http");
 
-class HttpService {
+class HttpUtility {
   static getServer(app) {
     return http.createServer(app);
   }
 }
 
-module.exports = HttpService;
+module.exports = HttpUtility;

@@ -1,4 +1,4 @@
-class LogService {
+class LogUtility {
   static info(text) {
     console.log("\x1b[36m%s\x1b[0m", `INFO: ${text}`);
   }
@@ -32,4 +32,4 @@ class LogService {
   }
 }
 
-module.exports = LogService;
+module.exports = LogUtility;

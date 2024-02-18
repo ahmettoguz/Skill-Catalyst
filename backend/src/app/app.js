@@ -7,7 +7,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 // import env variables
-const EnvService = require("../service/EnvService");
+const EnvUtility = require("../utility/EnvUtility");
 
 // database configurations
 const Mongo = require("../database/mongo/Mongo");
@@ -21,9 +21,9 @@ const cors = require("cors");
 app.use(cors());
 
 // internal middleware configurations
-if (EnvService.isLoggingActive === "true") {
-  const ExpressService = require("../service/ExpressService");
-  app.use(ExpressService.displayRequestInfo);
+if (EnvUtility.isLoggingActive === "true") {
+  const ExpressUtility = require("../utility/ExpressUtility");
+  app.use(ExpressUtility.displayRequestInfo);
 }
 
 // router configurations

@@ -1,4 +1,4 @@
-class UtilService {
+class CommonUtility {
   static removeKeysFromArrayOfObj(arrayOfObj, keys) {
     return arrayOfObj.map((obj) => {
       keys.forEach((key) => delete obj[key]);
@@ -7,4 +7,4 @@ class UtilService {
   }
 }
 
-module.exports = UtilService;
+module.exports = CommonUtility;

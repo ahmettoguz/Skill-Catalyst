@@ -1,15 +1,15 @@
-const LogService = require("./LogService");
+const LogUtility = require("./LogUtility");
 const fs = require("fs");
 const path = require("path");
 
-class FileService {
+class FileUtility {
   static readFile(relativePath) {
     try {
       return fs.readFileSync(path.join(__dirname, ...relativePath), "utf8");
     } catch (error) {
-      LogService.error("File service cannot read file!", error);
+      LogUtility.error("File service cannot read file!", error);
     }
   }
 }
 
-module.exports = FileService;
+module.exports = FileUtility;

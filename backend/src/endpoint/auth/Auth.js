@@ -1,5 +1,5 @@
-const ExpressService = require("../../service/ExpressService");
-const EncryptionService = require("../../service/EncryptionService");
+const ExpressUtility = require("../../utility/ExpressUtility");
+const EncryptionUtility = require("../../utility/EncryptionUtility");
 const AuthHelper = require("../../helper/auth/AuthHelper");
 const crud = require("../../database/crud/crud");
 
@@ -8,7 +8,7 @@ class Auth {
     // handle input
     const { isValid, errors: valErrors, input } = AuthHelper.handleInput(req);
     if (!isValid)
-      return ExpressService.returnResponse(
+      return ExpressUtility.returnResponse(
         res,
         400,
         "invalid input!",
@@ -21,33 +21,33 @@ class Auth {
 
     // check read operation and found user
     if (!readOperation || !user)
-      return ExpressService.returnResponse(res, 400, "user not found!");
+      return ExpressUtility.returnResponse(res, 400, "user not found!");
 
     // compare password
     const { state: isPasswordCorrect, errors: encErrors } =
-      await EncryptionService.compareEncyrptedText(
+      await EncryptionUtility.compareEncyrptedText(
         input.password,
         user.password
       );
 
     // check password
     if (!isPasswordCorrect)
-      return ExpressService.returnResponse(res, 400, "incorrect password!");
+      return ExpressUtility.returnResponse(res, 400, "incorrect password!");
 
     // crate jwt token
-    const { state: jwtOperation, jwt } = EncryptionService.signJwt({
+    const { state: jwtOperation, jwt } = EncryptionUtility.signJwt({
       id: user._id.toString(),
     });
 
     // check jwt operation
     if (!jwtOperation)
-      return ExpressService.returnResponse(res, 500, "Internal server error!");
+      return ExpressUtility.returnResponse(res, 500, "Internal server error!");
 
     // set jwt response to header
     res.setHeader("Authorization", jwt);
 
     // return response
-    return ExpressService.returnResponse(res, 200, "login success", { jwt });
+    return ExpressUtility.returnResponse(res, 200, "login success", { jwt });
   }
 }
 

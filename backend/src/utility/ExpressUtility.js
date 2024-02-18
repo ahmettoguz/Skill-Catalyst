@@ -1,10 +1,10 @@
-const LogService = require("./LogService");
+const LogUtility = require("./LogUtility");
 
-class ExpressService {
+class ExpressUtility {
   static returnResponse(res, statusCode, message, data = null) {
     // ---- usage ----
-    // return ExpressService.returnResponse(res, 500, "Cannot verified that client connection to websocket.","optional additional data");
-    // return ExpressService.returnResponse(res, 200, "user informations sent", "optional additional data");
+    // return ExpressUtility.returnResponse(res, 500, "Cannot verified that client connection to websocket.","optional additional data");
+    // return ExpressUtility.returnResponse(res, 200, "user informations sent", "optional additional data");
     // ---- usage end ----
 
     const state = statusCode == 200 ? true : false;
@@ -36,11 +36,11 @@ class ExpressService {
         responseTime: duration,
       };
 
-      LogService.responseInfo(log);
+      LogUtility.responseInfo(log);
     });
 
     next();
   }
 }
 
-module.exports = ExpressService;
+module.exports = ExpressUtility;
