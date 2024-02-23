@@ -10,7 +10,7 @@ const EnvUtility = require("./src/utility/EnvUtility.js");
 
 // create server
 let server;
-if (EnvUtility.isSslEnabled === "true") {
+if (EnvUtility.isSslEnabled == true) {
   server = HttpsUtility.getServer(app);
 } else {
   server = HttpUtility.getServer(app);
@@ -20,5 +20,4 @@ if (EnvUtility.isSslEnabled === "true") {
 server.listen(EnvUtility.port);
 
 // display output
-const protocol = EnvUtility.isSslEnabled == "true" ? "https" : "http";
-console.log(`Server is running on: ${protocol}://localhost:${EnvUtility.port}`);
+console.log(`Server is running on: ${EnvUtility.protocol}://localhost:${EnvUtility.port}`);
