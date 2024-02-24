@@ -1,0 +1,56 @@
+---------------------- Skill-Catalyst ----------------------
+------------------------------------------------------------
+Action:
+
+    Non-Authenticated User:
+        [] - login
+        [] - sign in
+
+        [] - Display home page
+
+        [] - Display mentors
+    ------------------------------------------------------------
+
+    Mentee:
+        [] - sign out
+
+        [] - Display home page
+
+        [] - Display mentors
+        [] - Make request to be mentee to the mentor
+        [] - Cancel to make request to be mentee to the mentor
+        [] - Remove himself to be mentee
+        [] - Give popularity point to the mentor
+
+        [] - Become mentor
+
+        [] - Display own profile
+        [] - Edit own profile
+    ------------------------------------------------------------
+
+    Mentor:
+        [] - sign out
+
+        [] - Display home page
+
+        [] - Display mentors
+        [] - Make request to be mentee to the mentor
+
+        [] - Cancel to be mentor
+
+        [] - Display mentee requests
+        [] - Accept mentee
+        [] - Reject mentee
+
+        [] - Display own mentees
+        [] - Remove him mentee
+
+        [] - Display own profile
+        [] - Edit own profile
+    ------------------------------------------------------------
+------------------------------------------------------------
+Data Attribute:
+
+    Mentee:
+    ------------------------------------------------------------
+------------------------------------------------------------
