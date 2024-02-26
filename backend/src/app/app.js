@@ -21,7 +21,7 @@ const cors = require("cors");
 app.use(cors());
 
 // internal middleware configurations
-if (EnvUtility.isLoggingActive === "true") {
+if (EnvUtility.isLoggingActive == true) {
   const ExpressUtility = require("../utility/ExpressUtility");
   app.use(ExpressUtility.displayRequestInfo);
 }
