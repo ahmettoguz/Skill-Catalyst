@@ -58,13 +58,8 @@ Data Attribute:
         password : String
         requested_mentors : List<int>
         popularized_mentors : List<int>
-    ------------------------------------------------------------
-
-    Mentee extends User:
-    ------------------------------------------------------------
-
-    Mentor extends User:
-        mentee_requests : List<int>
-        mentees : List<int>
+        mentor_id : Integer
+            mentee_requests : List<int>
+            mentees : List<int>
     ------------------------------------------------------------
 ------------------------------------------------------------
