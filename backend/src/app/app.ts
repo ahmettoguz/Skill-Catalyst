@@ -1,6 +1,6 @@
 // express import
-const express = require("express");
-const app = express();
+import express, { Express } from "express";
+const app: Express = express();
 
 // configure dotenv middleware
 const dotenv = require("dotenv");
@@ -21,7 +21,7 @@ const cors = require("cors");
 app.use(cors());
 
 // internal middleware configurations
-if (EnvUtility.isLoggingActive == true) {
+if (EnvUtility.isLoggingActive === "true") {
   const ExpressUtility = require("../utility/ExpressUtility");
   app.use(ExpressUtility.displayRequestInfo);
 }
@@ -30,4 +30,5 @@ if (EnvUtility.isLoggingActive == true) {
 const route = require("../router/root/route");
 route(app);
 
+export default app;
 module.exports = app;
