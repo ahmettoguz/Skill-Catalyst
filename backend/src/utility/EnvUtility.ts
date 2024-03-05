@@ -5,12 +5,11 @@ class EnvUtility {
   static isLoggingActive = process.env.LOG === "true";
 
   // int
-  static port = parseInt(process.env.PORT) || 3000;
+  static port: number = parseInt(process.env.PORT || "3000", 10);
 
   // string
   static dbURI = process.env.DB_URI;
-  static jwtSecret = process.env.JWT_SECRET;
+  static jwtSecret: string = process.env.JWT_SECRET || "fallbackSecret";
 }
 
-// Exporting the AppConfig class
 module.exports = EnvUtility;
